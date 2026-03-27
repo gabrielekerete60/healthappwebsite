@@ -99,19 +99,19 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
   };
 
   const protocols = [
-    { icon: Fingerprint, label: "Node Identifier", value: user.uid, category: "Security" },
-    { icon: Mail, label: "Digital Address", value: user.email || 'NO RECORD', category: "Communication" },
-    { icon: Phone, label: "Direct Link", value: userProfile?.phone || 'NO RECORD', category: "Communication" },
-    { icon: MapPin, label: "Geolocation", value: userProfile?.country ? `${userProfile.city || 'Central'}, ${userProfile.country}` : 'OFFLINE', category: "Localization" },
+    { icon: Fingerprint, label: "User ID", value: user.uid, category: "Security" },
+    { icon: Mail, label: "Email", value: user.email || 'NO RECORD', category: "Communication" },
+    { icon: Phone, label: "Phone", value: userProfile?.phone || 'NO RECORD', category: "Communication" },
+    { icon: MapPin, label: "Location", value: userProfile?.country ? `${userProfile.city || 'Central'}, ${userProfile.country}` : 'OFFLINE', category: "Localization" },
     { 
       icon: Calendar, 
-      label: "Account Life Cycle", 
+      label: "Member Since", 
       value: formatDateWithTime(userProfile?.createdAt || user.metadata.creationTime), 
       category: "System" 
     },
-    { icon: Award, label: "Authority Tier", value: userProfile?.tier?.toUpperCase() || 'BASIC', category: "Permissions" },
-    { icon: Shield, label: "Verification Level", value: userProfile?.verificationLevel?.toString() || '0', category: "Security" },
-    { icon: Activity, label: "Clinical Status", value: userProfile?.isBanned ? 'RESTRICTED' : 'OPERATIONAL', category: "System" },
+    { icon: Award, label: "Account Plan", value: userProfile?.tier?.toUpperCase() || 'BASIC', category: "Account" },
+    { icon: Shield, label: "Verification", value: userProfile?.verificationLevel?.toString() || '0', category: "Security" },
+    { icon: Activity, label: "Account Status", value: userProfile?.isBanned ? 'RESTRICTED' : 'ACTIVE', category: "System" },
   ];
 
   return (
@@ -159,11 +159,11 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                 <div className="space-y-4 text-center sm:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} TYPE</span>
+                    <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} ACCOUNT</span>
                   </div>
                   
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-[1.1] uppercase break-words">
-                    {userProfile?.fullName || user.displayName || 'Health Profile'}
+                    {userProfile?.fullName || user.displayName || 'Personal Profile'}
                   </h1>
 
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-2">
@@ -241,8 +241,8 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">PROFILE DETAILS</h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-0.5">Comprehensive Account Info</p>
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">ACCOUNT DETAILS</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-0.5">Your account information</p>
                   </div>
                 </div>
                 <button 
@@ -266,10 +266,10 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                       <div className="space-y-1">
                         <span className="block text-[8px] font-black text-slate-400 uppercase tracking-[0.2em]">{protocol.label}</span>
                         <p className="text-sm font-bold text-slate-900 dark:text-white break-all leading-relaxed">{protocol.value}</p>
-                        {protocol.label === "Account Life Cycle" && (
+                        {protocol.label === "Member Since" && (
                           <AccountAge createdAt={userProfile?.createdAt || user.metadata.creationTime} />
                         )}
-                        {protocol.label === "Authority Tier" && userProfile?.tier !== 'vip2' && (
+                        {protocol.label === "Account Plan" && userProfile?.tier !== 'vip2' && (
                           <button
                             onClick={() => {
                               setSelectedProtocol(false);
@@ -291,8 +291,8 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                 <div className="flex items-center gap-4 px-4 py-3 bg-blue-500/5 rounded-2xl border border-blue-500/10">
                   <Fingerprint className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-                    This profile data is encrypted using medical-grade security standards. 
-                    Access is restricted to authorized account owners only.
+                    This profile data is protected using high-security standards. 
+                    Access is restricted to the account owner only.
                   </p>
                 </div>
               </div>

@@ -14,7 +14,7 @@ export function IntelligenceDiscovery({ t, courses }: IntelligenceDiscoveryProps
   return (
     <div className="space-y-8 pb-12">
       <div className="flex items-center gap-3 px-4">
-        <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.3em]">Intelligence Discovery</span>
+        <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.3em]">Your Learning</span>
         <div className="h-px flex-1 bg-gradient-to-r from-blue-600/20 to-transparent" />
       </div>
       
@@ -47,10 +47,10 @@ export function IntelligenceDiscovery({ t, courses }: IntelligenceDiscoveryProps
                   </h3>
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[8px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800">
-                      Active Stream
+                      Active Course
                     </span>
                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                      {courses.length} Modules Synced
+                      {courses.length} Lessons Completed
                     </span>
                   </div>
                 </div>
@@ -73,7 +73,7 @@ export function IntelligenceDiscovery({ t, courses }: IntelligenceDiscoveryProps
                   
                   <div className="flex justify-between items-start mb-8">
                     <div className="space-y-1">
-                      <span className="text-[8px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.2em]">Clinical Module {i + 1}</span>
+                      <span className="text-[8px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.2em]">Course Module {i + 1}</span>
                       <h4 className="text-lg font-black text-slate-900 dark:text-white leading-tight uppercase tracking-tight max-w-[80%]">
                         {course.title}
                       </h4>
@@ -86,10 +86,10 @@ export function IntelligenceDiscovery({ t, courses }: IntelligenceDiscoveryProps
                   <div className="space-y-4">
                     <div className="flex items-end justify-between">
                       <div className="space-y-1">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Status</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Progress</span>
                         <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-2">
                           <span className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" />
-                          Evolution in Progress
+                          Learning in Progress
                         </span>
                       </div>
                       <div className="text-right">

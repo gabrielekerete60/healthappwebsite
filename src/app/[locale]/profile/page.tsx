@@ -56,7 +56,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const upgradeStatus = searchParams.get('upgrade');
     if (upgradeStatus === 'success') {
-      showAlert('Upgrade Successful', 'Your intelligence node has been scaled. New clinical protocols are now active.', 'success', 'CLOSE');
+      showAlert('Upgrade Successful', 'Your account has been upgraded. You now have access to premium features.', 'success', 'CLOSE');
       // Clean up URL without adding to history
       if (typeof window !== 'undefined') {
         const url = new URL(window.location.href);
@@ -122,7 +122,7 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-950 transition-colors">
         <Loader2 className="w-10 h-10 animate-spin text-blue-600 mb-4" />
-        <p className="text-slate-500 font-black uppercase tracking-widest text-[9px]">{t('syncingIdentity')}</p>
+        <p className="text-slate-500 font-black uppercase tracking-widest text-[9px]">Loading your profile...</p>
       </div>
     );
   }
@@ -136,7 +136,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-32 sm:pt-40 pb-32 relative overflow-hidden">
-      {/* Background Ambience - Neural look */}
+      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/[0.07] blur-[140px] rounded-full" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/[0.07] blur-[140px] rounded-full" />
@@ -146,17 +146,17 @@ export default function ProfilePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-start">
 
-          {/* Main Content Area - Primary Flow */}
+          {/* Main Content Area */}
           <div className="w-full lg:col-span-8 flex flex-col gap-6 md:gap-10 lg:gap-16 order-1">
 
-            {/* Identity Segment */}
+            {/* Profile Section */}
             <ProfileHeader 
               user={user} 
               userProfile={userProfile}
               onEdit={() => setIsEditing(true)} 
             />
 
-            {/* Telemetry Segment - Full width on mobile/tablet */}
+            {/* Statistics Section */}
             <div className="w-full">
               <ProfileStats 
                 user={user}
@@ -167,19 +167,19 @@ export default function ProfilePage() {
               />
             </div>
 
-            {/* Intelligence Discovery Segment */}
+            {/* Learning Section */}
             <div className="w-full">
               <IntelligenceDiscovery t={t} courses={courses} />
             </div>
           </div>
 
-          {/* Control System - Right Side Sidebar (Desktop) / Bottom Flow (Mobile) */}
+          {/* Sidebar */}
           <aside className="w-full lg:col-span-4 space-y-6 order-2 lg:sticky lg:top-24 lg:-mt-2">
             <div className="w-full">
               <ProfileMenu userProfile={userProfile} />
             </div>
 
-            {/* Quick Status Node */}
+            {/* Status Card */}
             <div className="relative group/status w-full hidden sm:block">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-[36px] blur-xl opacity-0 group-hover/status:opacity-100 transition duration-1000" />
               <div className="relative p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-[32px] sm:rounded-[40px] shadow-2xl overflow-hidden flex items-center gap-5 transition-all">
@@ -193,7 +193,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <div className="flex-1 relative z-10">
-                  <span className="block text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.2em] mb-1">Protocol Integrity</span>
+                  <span className="block text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.2em] mb-1">System Status</span>
                   <span className="text-[12px] sm:text-[14px] font-black text-slate-800 dark:text-white uppercase tracking-tight">All systems operational</span>
                 </div>
               </div>

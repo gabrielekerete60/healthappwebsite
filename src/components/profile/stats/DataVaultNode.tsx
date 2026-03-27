@@ -36,37 +36,37 @@ export function DataVaultNode({ processingExport, handleExport }: DataVaultNodeP
               <h3 className="text-4xl font-black text-white tracking-tighter uppercase leading-none">{t('dataVault')}</h3>
               <div className="flex items-center gap-3">
                 <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[8px] font-black uppercase tracking-widest border border-emerald-500/30">
-                  Secure Node
+                  Secure Storage
                 </span>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em]">
-                  ENCRYPTED ARCHIVE EXTRACTION
+                  SECURE DATA EXPORT
                 </p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-6">
-              <div className="flex-1 max-w-[200px] h-1.5 bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
+                </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                <div className="flex-1 max-w-[200px] h-1.5 bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
                 <div className="h-full w-3/4 bg-emerald-500/50 rounded-full" />
-              </div>
-              <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">74% Allocation</span>
-            </div>
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-8 self-end lg:self-auto">
-          <div className="hidden xl:block h-16 w-px bg-white/10" />
-          <div className="flex flex-col items-end gap-2">
-            <div className="text-[10px] font-black text-emerald-400 uppercase tracking-[0.3em] group-hover:translate-x-2 transition-transform flex items-center gap-6">
-              <span>Initialize Extraction</span>
-              <div className="p-4 bg-emerald-500 text-slate-900 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                </div>
+                <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">74% Storage Used</span>
+                </div>
+                </div>
+                </div>
+
+                <div className="flex items-center gap-8 self-end lg:self-auto">
+                <div className="hidden xl:block h-16 w-px bg-white/10" />
+                <div className="flex flex-col items-end gap-2">
+                <div className="text-[10px] font-black text-emerald-400 uppercase tracking-[0.3em] group-hover:translate-x-2 transition-transform flex items-center gap-6">
+                <span>Export My Data</span>
+                <div className="p-4 bg-emerald-500 text-slate-900 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.4)]">
                 <Download size={20} strokeWidth={3} />
-              </div>
-            </div>
-            <div className="text-[7px] font-bold text-slate-500 uppercase tracking-[0.2em] mr-16">
-              Last Access: {new Date().toLocaleDateString()} // Terminal Sync
-            </div>
-          </div>
-        </div>
+                </div>
+                </div>
+                <div className="text-[7px] font-bold text-slate-500 uppercase tracking-[0.2em] mr-16">
+                Last Update: {new Date().toLocaleDateString()} // System Updated
+                </div>
+                </div>
+                </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-1 opacity-20 overflow-hidden">

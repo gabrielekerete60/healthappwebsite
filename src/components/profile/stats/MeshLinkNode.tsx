@@ -37,12 +37,12 @@ export function MeshLinkNode({
           </div>
           <div>
             <h3 className="text-[10px] sm:text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.3em] mb-1">
-              Network Mesh
+              Referral Network
             </h3>
             <div className="flex items-center gap-2">
               <div className={`w-1.5 h-1.5 rounded-full ${hasCode ? 'bg-emerald-500 animate-pulse' : 'bg-slate-300 dark:bg-slate-600'}`} />
               <span className={`text-[9px] font-bold uppercase tracking-widest ${hasCode ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`}>
-                {hasCode ? 'Active Link' : 'Standby Mode'}
+                {hasCode ? 'Network Active' : 'Inactive'}
               </span>
             </div>
           </div>
@@ -57,10 +57,10 @@ export function MeshLinkNode({
               <Activity className="text-slate-400 dark:text-slate-500 w-7 h-7" />
             </div>
             <h4 className="text-[12px] sm:text-[14px] font-black text-slate-800 dark:text-white uppercase tracking-widest mb-3">
-              Mesh Inactive
+              Referral Inactive
             </h4>
             <p className="text-[11px] sm:text-[12px] text-slate-500 dark:text-slate-400 font-semibold leading-relaxed mb-6 max-w-[280px]">
-              Initialize your neural mesh to broadcast your identity token and expand the system cluster.
+              Create your referral network to share your referral code and grow your network.
             </p>
             
             <button
@@ -76,7 +76,7 @@ export function MeshLinkNode({
                    <Zap size={16} className="text-white dark:text-slate-900 group-hover/genbtn:text-indigo-400 dark:group-hover/genbtn:text-indigo-600 transition-colors" />
                  )}
                  <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-white dark:text-slate-900">
-                   {generating ? 'INITIALIZING...' : 'GENERATE ID TOKEN'}
+                   {generating ? 'CREATING...' : 'CREATE REFERRAL CODE'}
                  </span>
               </div>
             </button>
@@ -85,7 +85,7 @@ export function MeshLinkNode({
           <div className="flex flex-col items-center justify-end h-full w-full">
             <div className="w-full bg-slate-50 dark:bg-white/[0.02] p-5 rounded-2xl border border-slate-100 dark:border-white/5 relative overflow-hidden group/codeblock text-center flex flex-col items-center justify-center mb-5">
               <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-2">
-                Identity Token
+                Referral Code
               </span>
               <code className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 dark:text-white tracking-widest font-mono relative z-10 group-hover/codeblock:scale-105 transition-transform duration-500 w-full text-center">
                 {referralCode}
@@ -98,7 +98,7 @@ export function MeshLinkNode({
                 className="group/actionbtn relative overflow-hidden w-full py-3.5 bg-blue-600 dark:bg-blue-600 rounded-xl font-black text-[10px] uppercase tracking-[0.15em] text-white transition-all hover:bg-blue-700 active:scale-[0.98] shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
               >
                 <Share2 size={14} className="group-hover/actionbtn:scale-110 group-hover/actionbtn:-rotate-12 transition-transform duration-300" />
-                <span>Broadcast Link</span>
+                <span>Share Link</span>
               </button>
               
               <button
@@ -106,7 +106,7 @@ export function MeshLinkNode({
                 className="group/actionbtn relative overflow-hidden w-full py-3.5 bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 rounded-xl font-black text-[10px] uppercase tracking-[0.15em] text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-all active:scale-[0.98] flex items-center justify-center gap-2"
               >
                 <Copy size={13} className="group-hover/actionbtn:scale-110 transition-transform duration-300" />
-                <span>Copy Token</span>
+                <span>Copy Code</span>
               </button>
             </div>
           </div>

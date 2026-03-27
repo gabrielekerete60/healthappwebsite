@@ -166,7 +166,7 @@ export default function SignUpPage() {
               <div className="w-full border-t border-slate-100 dark:border-white/5"></div>
             </div>
             <div className="relative flex justify-center text-[9px] font-black uppercase tracking-[0.4em]">
-              <span className="bg-slate-50 dark:bg-[#020617] px-8 text-slate-400 transition-colors uppercase text-[9px] font-black tracking-widest">Federated Auth</span>
+              <span className="bg-slate-50 dark:bg-[#020617] px-8 text-slate-400 transition-colors uppercase text-[9px] font-black tracking-widest">OR</span>
             </div>
           </div>
 

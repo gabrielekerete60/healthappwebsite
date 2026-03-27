@@ -25,7 +25,7 @@ export function IntelPointsNode({ level, points, nextLevelProgress, user }: Inte
           <ShieldCheck size={20} />
         </div>
         <div className="text-right">
-          <span className="block text-[8px] font-black text-slate-400 uppercase tracking-[0.3em]">Evolution Rank</span>
+          <span className="block text-[8px] font-black text-slate-400 uppercase tracking-[0.3em]">Your Rank</span>
           <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-widest">LEVEL {level}</span>
         </div>
       </div>
@@ -33,13 +33,13 @@ export function IntelPointsNode({ level, points, nextLevelProgress, user }: Inte
       <div className="flex items-center justify-between gap-4 mb-8 relative z-10">
         <div className="space-y-1">
           <h4 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
-            INTEL
+            POINTS
           </h4>
           <div className="flex items-baseline gap-2">
             <span className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter tabular-nums leading-none">
               {points}
             </span>
-            <span className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">EXP</span>
+            <span className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">PTS</span>
           </div>
         </div>
 
@@ -74,13 +74,13 @@ export function IntelPointsNode({ level, points, nextLevelProgress, user }: Inte
 
       <div className="bg-slate-50 dark:bg-white/[0.02] p-4 rounded-2xl border border-slate-100 dark:border-white/5 relative z-10 space-y-3">
         <div className="flex items-center justify-between text-[8px] font-black text-slate-400 uppercase tracking-widest">
-          <span>Node Identity</span>
+          <span>Account ID</span>
           <span className="text-blue-600 dark:text-blue-400 font-mono">{user?.uid?.slice(0, 12).toUpperCase() || 'UNKNOWN'}</span>
         </div>
         <div className="h-px bg-slate-200 dark:bg-white/5" />
         <div className="flex items-center gap-3 text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
           <RefreshCw size={10} className="animate-spin-slow" />
-          <span>Syncing with Global Archives</span>
+          <span>Updating your progress</span>
         </div>
       </div>
 

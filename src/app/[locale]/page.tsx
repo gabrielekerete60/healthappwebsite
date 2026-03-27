@@ -49,7 +49,7 @@ export default function Home() {
                     </div>
                     <div className="mb-6 relative z-10 shrink-0 text-center sm:text-left">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-black uppercase tracking-[0.2em] shadow-sm mb-3">
-                        {t('home.clinicalDiscovery')}
+                        Symptom Discovery
                       </div>
                       <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
                         {t('home.guidedDiscoveryTitle')}
@@ -64,7 +64,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Right Area: Telemetry Dashboard */}
+                {/* Right Area: Health Summary */}
                 <div className="lg:col-span-5">
                   <HomeIntelligenceSection />
                 </div>
@@ -81,7 +81,7 @@ export default function Home() {
                 className="text-center mb-16 sm:mb-24 space-y-6"
               >
                 <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] shadow-sm border border-indigo-100/50 dark:border-indigo-800/50">
-                  {t('home.foundationalIntegrity')}
+                  Our Foundation
                 </div>
                 <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[1.05]">
                   {t('home.featuresTitle')}
@@ -154,7 +154,7 @@ export default function Home() {
                 >
                   <div className="space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-[10px] font-black uppercase tracking-widest border border-white/10 backdrop-blur-md">
-                      <Star className="w-3 h-3 text-amber-400 fill-current" /> {t('home.networkExpansion')}
+                      <Star className="w-3 h-3 text-amber-400 fill-current" /> Network Growth
                     </div>
                     <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.05]">
                       {t('home.ctaTitle')}
@@ -202,7 +202,7 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Intelligence Feed Integration */}
+        {/* Health Updates Feed */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="rounded-[64px] overflow-hidden border border-slate-200/60 dark:border-white/5 shadow-2xl bg-white/50 dark:bg-slate-900/30 backdrop-blur-3xl group/feed hover:border-blue-500/30 transition-all duration-1000">
