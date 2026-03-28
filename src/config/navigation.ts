@@ -3,7 +3,7 @@ export const NAVIGATION_LINKS = [
   { href: '/directory', labelKey: 'common.directory' },
   { href: '/institutions', labelKey: 'institution.menuLabel', defaultLabel: 'Institutions' },
   { href: '/community', labelKey: 'common.community' },
-  { href: '/learning', labelKey: 'common.learning', defaultLabel: 'Courses' },
+  { href: '/learning', labelKey: 'common.learn', defaultLabel: 'Courses' },
   { href: '/trends', labelKey: 'trends.menuLabel', defaultLabel: 'Trends' },
   { href: '/chat', labelKey: 'common.chat' },
 ];

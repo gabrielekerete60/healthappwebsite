@@ -48,7 +48,25 @@
     "trySearching": "Intenta buscar:",
     "securityIntercepted": "Seguridad Interceptada",
     "synthesizingIntelligence": "Sintetizando Inteligencia",
-    "synthesizingSubtitle": "Analizando archivos revisados por pares y sabiduría tradicional..."
+    "synthesizingSubtitle": "Analizando archivos revisados por pares y sabiduría tradicional...",
+    "previous": "Previous",
+    "continue": "Continue",
+    "processing": "Processing...",
+    "limits": "Limits",
+    "left": "Left",
+    "access": "Access",
+    "unlimited": "Unlimited",
+    "dailyLimitReached": "Daily limit reached. Please upgrade your account to continue searching.",
+    "browseCourses": "Browse Courses",
+    "myEnrollments": "My Enrollments",
+    "myCreations": "My Creations",
+    "hostCourse": "Host Course",
+    "intelligenceDiscovery": "Intelligence Discovery",
+    "noActiveInsights": "No active insights found",
+    "reSyncFeed": "Resync Feed",
+    "retryConnection": "Retry Connection",
+    "syncInterrupted": "Sync Interrupted",
+    "syncInterruptedSubtitle": "Reconnecting to health archives..."
   },
   "search": {
     "medical": "Ciencia Médica",
@@ -75,7 +93,17 @@
     "ctaTitle": "Únase al Registro Global de Salud",
     "ctaSubtitle": "Ya sea paciente o profesional, conviértase en un nodo en la red de inteligencia en evolución.",
     "ctaButton": "Explorar Directorio",
-    "ctaRegister": "Registrarse como Experto"
+    "ctaRegister": "Registrarse como Experto",
+    "clinicalDiscovery": "Health Discovery",
+    "guidedDiscoveryTitle": "Not sure where to start?",
+    "guidedDiscoveryDesc": "Use our guide to help narrow down your concerns.",
+    "foundationalIntegrity": "Reliable Results",
+    "networkExpansion": "Growing Network",
+    "joinVerified": "Join 1000+ verified professionals",
+    "statDoctors": "Verified Doctors",
+    "statHerbal": "Herbal Practitioners",
+    "statCenters": "Health Centers",
+    "statRecords": "Monthly Insights"
   },
   "feed": {
     "recommended": "Recomendado para ti",
@@ -162,7 +190,9 @@
       "assistance": "Asistencia",
       "terminateAccount": "Eliminar Cuenta",
       "signOut": "Cerrar Sesión",
-      "deleteConfirm": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer."
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.",
+      "expertDashboard": "Expert Dashboard",
+      "appointments": "Appointments"
     }
   },
   "community": {
@@ -187,7 +217,8 @@
     "noHistory": "No se encontró historial",
     "noHistoryDesc": "Las búsquedas que realice aparecerán aquí.",
     "startDate": "Fecha Inicio",
-    "endDate": "Fecha Fin"
+    "endDate": "Fecha Fin",
+    "clearConfirm": "Are you sure you want to clear your entire search history?"
   },
   "saved": {
     "title": "Temas Guardados",
@@ -202,7 +233,21 @@
     "subtitle": "Explore conocimientos basados en evidencia en disciplinas de salud modernas y tradicionales.",
     "readMore": "Leer Artículo Completo",
     "grade": "Grado",
-    "back": "Volver a Investigación"
+    "back": "Volver a Investigación",
+    "badge": "Research Archive",
+    "fetching": "Loading...",
+    "scientificData": "Loading Data...",
+    "documentationNotFound": "Not Found",
+    "returnToResearch": "Return",
+    "archiveResearch": "Archive",
+    "leadInvestigator": "Lead Researcher",
+    "publicationDate": "Date",
+    "researchIndexTags": "Tags",
+    "contentRestricted": "Content Restricted.",
+    "contentRestrictedDesc": "Full research is available to platform members.",
+    "unlockFullRecord": "Unlock Full Access",
+    "educationalProtocol": "Educational Only",
+    "educationalProtocolDesc": "This information is for educational purposes and does not replace professional medical advice."
   },
   "institution": {
     "menuLabel": "Instituciones",
@@ -592,7 +637,23 @@
     "clearAll": "Limpiar Todo",
     "noMatches": "No se encontraron coincidencias",
     "noMatchesDesc": "Intente ajustar su consulta de búsqueda o los filtros.",
-    "verified": "Experto Verificado"
+    "verified": "Experto Verificado",
+    "alertProtocolFailed": "Action Failed",
+    "alertExpertGone": "Expert no longer exists.",
+    "alertInvalidCode": "Invalid Code",
+    "alertInvalidCodeDesc": "The code you entered is invalid.",
+    "alertExpiredCode": "Expired Code",
+    "alertExpiredCodeDesc": "The code you entered has expired.",
+    "alertLimitReached": "Limit Reached",
+    "alertLimitReachedDesc": "This code has reached its limit.",
+    "alertTooMany": "Too Many Attempts",
+    "alertTooManyDesc": "Please wait a minute and try again.",
+    "alertVerificationError": "Error",
+    "alertCheckNetwork": "Check your connection and try again.",
+    "alertLocationDenied": "Location Denied",
+    "alertLocationDeniedDesc": "Location access was denied.",
+    "backToTerminal": "Back",
+    "gotIt": "Got it"
   },
   "learningPage": {
     "title": "Inteligencia de Aprendizaje",
@@ -643,7 +704,8 @@
       "interests": "Intereses",
       "role": "Rol de Plataforma",
       "kyc": "Verificación",
-      "tier": "Nivel de Experto"
+      "tier": "Nivel de Experto",
+      "location": "Location"
     },
     "setupTitle": "Configure su hub.",
     "setupSubtitle": "Personalice su nodo de inteligencia para obtener los mejores conocimientos de salud.",
@@ -670,7 +732,17 @@
       "dob": "Fecha de Nacimiento",
       "ageRange": "Rango de Edad",
       "placeholderUsername": "id_unico",
-      "placeholderPhone": "555 000 0000"
+      "placeholderPhone": "555 000 0000",
+      "nameError": "Only hyphens (-) allowed",
+      "usernameError": "No spaces allowed",
+      "noSpacesScream": "NO SPACES!",
+      "personalProfile": "My Profile",
+      "firstNamePlaceholder": "Jane",
+      "lastNamePlaceholder": "Doe",
+      "securityProtocolActive": "Secure Profile",
+      "securityProtocolDesc1": "Your name should match your ID to keep your account ",
+      "securityProtocolDesc2": "Private and Secure",
+      "securityProtocolDesc3": " across our network."
     },
     "security": {
       "title": "Verificar Identidad.",
@@ -699,6 +771,23 @@
       "herbalDesc": "Ofrezca sabiduría tradicional validada.",
       "hospital": "Centro de Salud",
       "hospitalDesc": "Registre una institución clínica."
+    },
+    "initializing": "Starting Platform...",
+    "kyc": {
+      "title": "Verification.",
+      "subtitle": "Submit your ID to get verified.",
+      "idNumber": "ID Number",
+      "idCard": "ID Card / Passport",
+      "selfie": "Selfie with ID",
+      "upload": "Upload",
+      "address": "Address",
+      "specialization": "Specialty",
+      "years": "Years"
+    },
+    "tier": {
+      "title": "Account Level.",
+      "subtitle": "Choose a level to unlock more features.",
+      "badge": "Account Level"
     }
   },
   "journalPage": {
@@ -739,5 +828,99 @@
     "comments": "Comentarios",
     "like": "Apoyar",
     "all": "Todos los flujos"
+  },
+  "appointments": {
+    "title": "My Appointments",
+    "subtitle": "Manage your consultations and expert chats.",
+    "syncing": "Syncing Appointments...",
+    "authRequired": "Sign In Required",
+    "authRequiredDesc": "Please sign in to access your secure appointment history.",
+    "signInNow": "Sign In Now",
+    "noActiveSchedules": "No appointments found",
+    "noActiveSchedulesDesc": "Connect with verified doctors or herbal specialists to start your health journey.",
+    "browseRegistry": "Browse Experts",
+    "chatError": "Chat Error",
+    "chatErrorDesc": "Could not start the secure chat. Please try again."
+  },
+  "journal": {
+    "title": "Health Journal",
+    "subtitle": "Track your daily symptoms and health observations to get better insights over time.",
+    "newEntry": "New Entry",
+    "lockedTitle": "Journal Locked.",
+    "lockedDesc": "The Health Journal is reserved for PLUS and ELITE members. Upgrade to track your health history.",
+    "emptyTitle": "No Entries Yet",
+    "emptyDesc": "Start logging your symptoms to build a health timeline.",
+    "formSymptoms": "Symptoms (Comma Separated)",
+    "formSymptomsPlaceholder": "e.g. Headache, Nausea, Fatigue",
+    "formSeverity": "Severity Level (1-5)",
+    "formNotes": "Notes (Optional)",
+    "formNotesPlaceholder": "Add more details about how you feel...",
+    "formSubmit": "Log Symptoms",
+    "formSubmitting": "Logging...",
+    "formCancel": "Cancel",
+    "severityLabel": "Severity",
+    "noNotes": "No additional notes provided.",
+    "initialPhase": "Initial Phase"
+  },
+  "vault": {
+    "title": "Medical Vault",
+    "subtitle": "Your records are secured with medical-grade encryption. Only you can access them.",
+    "sharedSubtitle": "You are viewing a shared record.",
+    "uploadRecord": "Upload Record",
+    "uploading": "Uploading...",
+    "searchPlaceholder": "Search records by name or date...",
+    "totalNodes": "Total Records",
+    "recordSecured": "Record Secured",
+    "recordSecuredDesc": "{name} has been encrypted and uploaded to your vault.",
+    "uploadFailed": "Upload Failed",
+    "lockedTitle": "Vault Locked.",
+    "lockedDesc": "The Medical Vault is reserved for PLUS and ELITE members. Upgrade to securely store your health records.",
+    "emptyTitle": "No Records Found",
+    "emptyDesc": "Your vault is empty. Upload your first medical report to begin.",
+    "scaleAuthority": "Upgrade Account"
+  },
+  "upgrade": {
+    "title": "Upgrade Your Plan.",
+    "subtitle": "Unlock advanced health insights and personalized tracking.",
+    "currentTier": "Current Plan",
+    "monthly": "Monthly",
+    "activeNode": "Active Plan",
+    "standardProtocol": "Features",
+    "fullAccess": "Full Health Access",
+    "confirmAcquisition": "Confirm Upgrade",
+    "confirmAcquisitionDesc": "You are about to upgrade your account to IKIKE {tier} for ₦{amount} per month.",
+    "initializePayment": "Proceed to Payment",
+    "matrixTitle": "Plan Comparison.",
+    "matrixSubtitle": "A detailed breakdown of every benefit across our network.",
+    "protocolNode": "Feature",
+    "technicalSpecification": "Details",
+    "securedProtocol": "Secure Health Data",
+    "securedProtocolDesc": "All plans include high-level encryption. Your records remain private and secure.",
+    "securitySpecs": "Security Details",
+    "free": "Free",
+    "tierBasic": "IKIKE Basic",
+    "tierPlus": "IKIKE Plus",
+    "tierPremium": "IKIKE Premium",
+    "backToProfile": "Back to Profile"
+  },
+  "tools": {
+    "title": "System Tools",
+    "subtitle": "Administrative tools for managing the application.",
+    "dbSeeding": "Database Seeding",
+    "dbSeedingDesc": "Securely seed the database with initial data."
+  },
+  "disclaimerPage": {
+    "title": "Legal Disclaimers",
+    "subtitle": "Please read these disclaimers carefully regarding the use of IKIKE.",
+    "global": "Global",
+    "globalDesc": "IKIKE provides health information for educational purposes only. It does not replace professional medical advice. Always consult a qualified doctor.",
+    "search": "Search",
+    "searchDesc": "Content shown is educational. IKIKE does not provide medical or herbal treatment advice.",
+    "traditional": "Traditional",
+    "traditionalDesc": "Herbal information is for educational purposes only. IKIKE does not recommend herbs as treatments or provide dosages.",
+    "emergency": "Emergency",
+    "emergencyDesc": "Seek immediate care for urgent medical issues. Contact emergency services if needed.",
+    "directoryTitle": "Expert Disclaimer",
+    "directoryDesc": "Listings are for informational purposes. IKIKE does not guarantee the quality of third-party services."
   }
 }

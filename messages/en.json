@@ -130,7 +130,17 @@
     "left": "Left",
     "access": "Access",
     "unlimited": "Unlimited",
-    "dailyLimitReached": "Daily limit reached. Please upgrade your account to continue searching."
+    "dailyLimitReached": "Daily limit reached. Please upgrade your account to continue searching.",
+    "browseCourses": "Browse Courses",
+    "myEnrollments": "My Enrollments",
+    "myCreations": "My Creations",
+    "hostCourse": "Host Course",
+    "intelligenceDiscovery": "Intelligence Discovery",
+    "noActiveInsights": "No active insights found",
+    "reSyncFeed": "Resync Feed",
+    "retryConnection": "Retry Connection",
+    "syncInterrupted": "Sync Interrupted",
+    "syncInterruptedSubtitle": "Reconnecting to health archives..."
   },
   "search": {
     "medical": "Medical Science",
@@ -788,7 +798,9 @@
       "security": "Security",
       "location": "Location",
       "interests": "Interests",
-      "role": "Role"
+      "role": "Role",
+      "kyc": "Verification",
+      "tier": "Account Level"
     },
     "setupTitle": "Setup your profile.",
     "setupSubtitle": "Tell us about yourself to personalize your health insights.",
