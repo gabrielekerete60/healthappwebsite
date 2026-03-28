@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { auth } from '@/lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Clock, AlertTriangle } from 'lucide-react';
@@ -22,6 +23,16 @@ export default function AutoLockController() {
   }, [router]);
 
   const resetTimer = useCallback(() => {
+    // If no user is logged in, don't start/reset the timer
+    if (!auth.currentUser) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
+      if (countdownRef.current) clearInterval(countdownRef.current);
+      setShowWarning(false);
+      setTimeLeft(null);
+      return;
+    }
+
     if (timerRef.current) clearTimeout(timerRef.current);
     if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
     if (countdownRef.current) clearInterval(countdownRef.current);
@@ -71,6 +82,11 @@ export default function AutoLockController() {
     // Listen for storage changes from ProfileMenu
     window.addEventListener('storage', resetTimer);
 
+    // Watch for auth changes to start/stop the timer
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      resetTimer();
+    });
+
     resetTimer(); // Initial start
 
     return () => {
@@ -79,6 +95,7 @@ export default function AutoLockController() {
       if (countdownRef.current) clearInterval(countdownRef.current);
       events.forEach(event => window.removeEventListener(event, handleActivity));
       window.removeEventListener('storage', resetTimer);
+      unsubscribeAuth();
     };
   }, [resetTimer]);
 
