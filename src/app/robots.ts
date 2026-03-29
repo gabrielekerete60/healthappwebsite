@@ -10,8 +10,8 @@ export default function robots(): MetadataRoute.Robots {
   let disallowPaths: string[] = [];
   locales.forEach(locale => {
     protectedRoutes.forEach(route => {
-      disallowPaths.push(`/\${locale}\${route}`);
-      disallowPaths.push(`/\${locale}\${route}/*`);
+      disallowPaths.push(`/${locale}${route}`);
+      disallowPaths.push(`/${locale}${route}/*`);
     });
   });
 
@@ -24,6 +24,6 @@ export default function robots(): MetadataRoute.Robots {
         ...disallowPaths
       ],
     },
-    sitemap: `\${BASE_URL}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

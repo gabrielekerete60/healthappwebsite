@@ -73,14 +73,18 @@ export default async function LocaleLayout({
               <UiProvider>
                 <AuthCheck>
                   <PushNotificationManager />
-                  <AiChatbotWrapper />
-                  <GlobalDisclaimer />
-                  <Header />
+                  <div className="print:hidden">
+                    <AiChatbotWrapper />
+                    <GlobalDisclaimer />
+                    <Header />
+                  </div>
                   <main className="flex-grow dark:bg-slate-900">
                     {children}
                   </main>
-                  <ScrollToTop />
-                  <footer className="relative bg-slate-50 dark:bg-slate-950 border-t border-slate-200/50 dark:border-slate-800/50 pt-24 pb-12 px-4 overflow-hidden">
+                  <div className="print:hidden">
+                    <ScrollToTop />
+                  </div>
+                  <footer className="relative bg-slate-50 dark:bg-slate-950 border-t border-slate-200/50 dark:border-slate-800/50 pt-24 pb-12 px-4 overflow-hidden print:hidden">
               {/* Background Accents */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-30">
                 <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-400/10 blur-[100px] rounded-full" />

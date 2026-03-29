@@ -50,13 +50,13 @@ async function executeFirebaseTeardown() {
         // Issue mass deletion payload
         const deleteResult = await auth.deleteUsers(uids);
         authDeletedCount += deleteResult.successCount;
-        console.log(` -> Eradicated \${authDeletedCount} Auth profiles...`);
+        console.log(` -> Eradicated ${authDeletedCount} Auth profiles...`);
       }
 
       nextPageToken = listUsersResult.pageToken;
     } while (nextPageToken);
 
-    console.log(`✅ SUCCESS: Permanently wiped \${authDeletedCount} accounts from Firebase Authentication.\\n`);
+    console.log(`✅ SUCCESS: Permanently wiped ${authDeletedCount} accounts from Firebase Authentication.\n`);
 
 
     // ---------------------------------------------------------
@@ -67,7 +67,7 @@ async function executeFirebaseTeardown() {
     const snapshot = await usersRef.get();
 
     if (snapshot.empty) {
-      console.log("✅ SUCCESS: The 'users' Firestore collection is already empty.\\n");
+      console.log("✅ SUCCESS: The 'users' Firestore collection is already empty.\n");
     } else {
       let firestoreDeletedCount = 0;
       const batchArray: admin.firestore.WriteBatch[] = [];
@@ -91,15 +91,15 @@ async function executeFirebaseTeardown() {
       });
 
       // Execute the multi-batch destruction payloads
-      console.log(` -> Dispatching \${batchArray.length} asynchronous write batches to Google Server...`);
+      console.log(` -> Dispatching ${batchArray.length} asynchronous write batches to Google Server...`);
       for (const batch of batchArray) {
         await batch.commit();
       }
 
-      console.log(`✅ SUCCESS: Permanently wiped \${firestoreDeletedCount} NoSQL documents from Firestore.\\n`);
+      console.log(`✅ SUCCESS: Permanently wiped ${firestoreDeletedCount} NoSQL documents from Firestore.\n`);
     }
 
-    console.log("🔥 TEARDOWN COMPLETE 🔥\\n");
+    console.log("🔥 TEARDOWN COMPLETE 🔥\n");
 
   } catch (error) {
     console.error("❌ Fatal Error executing Teardown Pipeline:", error);

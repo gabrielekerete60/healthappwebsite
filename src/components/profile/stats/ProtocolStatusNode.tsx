@@ -17,8 +17,8 @@ export function ProtocolStatusNode({ tierName, timeLeft }: ProtocolStatusNodePro
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      onClick={() => router.push('/upgrade')}
-      className="bg-white dark:bg-slate-900 rounded-[40px] p-8 border border-slate-100 dark:border-white/5 shadow-2xl relative overflow-hidden group cursor-pointer"
+      onClick={() => !timeLeft && router.push('/upgrade')}
+      className={`bg-white dark:bg-slate-900 rounded-[40px] p-8 border border-slate-100 dark:border-white/5 shadow-2xl relative overflow-hidden group ${!timeLeft ? 'cursor-pointer' : ''}`}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/[0.03] to-transparent h-[200%] -translate-y-full group-hover:translate-y-full transition-transform duration-[3000ms] pointer-events-none" />
       

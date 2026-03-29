@@ -32,7 +32,7 @@ export default function CertificatePage() {
   if (!path || !certInfo) return <div className="p-20 text-center">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-slate-100 pt-32 sm:pt-40 pb-12 px-4 print:bg-white print:p-0">
+    <div className="min-h-screen bg-slate-100 pt-32 sm:pt-40 pb-12 px-4 print:bg-white print:p-0 print:pt-0">
       <div className="max-w-4xl mx-auto mb-8 flex items-center justify-between print:hidden">
         <Link href={`/learning/${id}`} className="flex items-center text-slate-500 hover:text-blue-600 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -47,7 +47,7 @@ export default function CertificatePage() {
         </button>
       </div>
 
-      <div className="max-w-4xl mx-auto bg-white border-[16px] border-slate-900 p-12 relative shadow-2xl overflow-hidden print:shadow-none print:border-[12px]">
+      <div className="max-w-4xl mx-auto bg-white border-[16px] border-slate-900 p-12 relative shadow-2xl overflow-hidden print:shadow-none print:border-[12px] print:m-0 print:w-full print:max-w-none print-exact">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full -mr-32 -mt-32 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full -ml-32 -mb-32 pointer-events-none" />

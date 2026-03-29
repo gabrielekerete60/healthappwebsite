@@ -114,7 +114,7 @@ export const paymentService = {
    */
   verifyPayment: async (sessionId: string): Promise<{success: boolean; error?: string}> => {
     try {
-      const response = await fetch(`/api/payment/verify?reference=\${sessionId}`);
+      const response = await fetch(`/api/payment/verify?reference=${sessionId}`);
       const data = await response.json();
       
       if (response.ok && data.success) {

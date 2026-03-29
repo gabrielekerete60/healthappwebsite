@@ -157,9 +157,18 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
             <div className="flex-1 min-w-0 w-full space-y-8">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                 <div className="space-y-4 text-center sm:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} Account</span>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                      <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} Account</span>
+                    </div>
+
+                    {userProfile?.tier && userProfile.tier !== 'basic' && (
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 dark:bg-white border border-slate-800 dark:border-slate-200">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                        <h3 className="text-[10px] font-black uppercase tracking-widest text-white dark:text-slate-900">SETTINGS & OPTIONS</h3>
+                      </div>
+                    )}
                   </div>
                   
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-[1.1] uppercase break-words">
@@ -269,7 +278,7 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                         {detail.label === "Joined On" && (
                           <AccountAge createdAt={userProfile?.createdAt || user.metadata.creationTime} />
                         )}
-                        {detail.label === "Current Plan" && userProfile?.tier !== 'vip2' && (
+                        {detail.label === "Current Plan" && userProfile?.tier !== 'vip1' && userProfile?.tier !== 'vip2' && userProfile?.tier !== 'premium' && (
                           <button
                             onClick={() => {
                               setShowDetails(false);

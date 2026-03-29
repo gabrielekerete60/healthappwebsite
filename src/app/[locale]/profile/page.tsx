@@ -18,6 +18,7 @@ import { IntelligenceDiscovery } from '@/components/profile/IntelligenceDiscover
 import ProfileMenu from '@/components/profile/ProfileMenu';
 import EditProfileModal from '@/components/profile/EditProfileModal';
 import NiceModal from '@/components/common/NiceModal';
+import { useLearning } from '@/hooks/useLearning';
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -26,6 +27,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editFormData, setEditFormData] = useState({ displayName: '', phone: '' });
+  const { enrolledPaths } = useLearning();
   const [modalConfig, setModalConfig] = useState<{
     isOpen: boolean;
     title: string;
@@ -129,10 +131,11 @@ export default function ProfilePage() {
 
   if (!user) return null;
 
-  const courses = [
-    { title: 'Managing Hypertension', progress: 35, color: 'bg-blue-600' },
-    { title: 'Sleep Hygiene Masterclass', progress: 80, color: 'bg-indigo-600' }
-  ];
+  const displayCourses = enrolledPaths.slice(0, 2).map((path, i) => ({
+    title: path.title,
+    progress: path.progress,
+    color: i % 2 === 0 ? 'bg-blue-600' : 'bg-indigo-600'
+  }));
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors pt-32 sm:pt-40 pb-32 relative overflow-hidden">
@@ -169,7 +172,7 @@ export default function ProfilePage() {
 
             {/* Learning Section */}
             <div className="w-full">
-              <IntelligenceDiscovery t={t} courses={courses} />
+              <IntelligenceDiscovery t={t} courses={displayCourses} />
             </div>
           </div>
 

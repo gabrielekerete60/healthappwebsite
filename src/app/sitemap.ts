@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   locales.forEach((locale) => {
     publicRoutes.forEach((route) => {
       sitemapEntries.push({
-        url: `\${BASE_URL}/\${locale}\${route}`,
+        url: `${BASE_URL}/${locale}${route}`,
         lastModified: new Date(),
         changeFrequency: route === '' ? 'daily' : 'weekly',
         priority: route === '' ? 1 : 0.8,

@@ -91,12 +91,14 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
         animate={{ opacity: 1, x: 0 }}
         className="bg-white dark:bg-slate-900 rounded-[32px] sm:rounded-[48px] shadow-2xl dark:shadow-indigo-500/10 border border-slate-100 dark:border-white/5 overflow-hidden flex flex-col h-fit"
       >
-        <div className="p-6 sm:p-8 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-slate-800/30">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 dark:text-white">SETTINGS & OPTIONS</h3>
+        {!isPremium && (
+          <div className="p-6 sm:p-8 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-slate-800/30">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 dark:text-white">SETTINGS & OPTIONS</h3>
+            </div>
           </div>
-        </div>
+        )}
         
         <div className="space-y-6">
           <div className="px-4 pt-4 md:pt-6">
