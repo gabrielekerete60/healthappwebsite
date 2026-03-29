@@ -15,7 +15,9 @@ export default function CourseDashboardPage() {
   
   const [course, setCourse] = useState<LearningPath | null>(null);
   const [enrollments, setEnrollments] = useState<any[]>([]);
+  const [filteredEnrollments, setFilteredEnrollments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<'all' | 'starting' | 'halfway' | 'completed'>('all');
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -25,6 +27,7 @@ export default function CourseDashboardPage() {
           setCourse(courseData);
           const enrollmentsData = await contentService.getCourseEnrollments(id);
           setEnrollments(enrollmentsData);
+          setFilteredEnrollments(enrollmentsData);
         }
       } catch (error) {
         console.error("Failed to fetch course dashboard data:", error);
@@ -34,6 +37,18 @@ export default function CourseDashboardPage() {
 
     fetchCourseData();
   }, [id]);
+
+  useEffect(() => {
+    let result = enrollments;
+    if (filter === 'starting') {
+      result = enrollments.filter(e => (e.progress || 0) < 20);
+    } else if (filter === 'halfway') {
+      result = enrollments.filter(e => (e.progress || 0) >= 20 && (e.progress || 0) < 90);
+    } else if (filter === 'completed') {
+      result = enrollments.filter(e => (e.progress || 0) >= 90);
+    }
+    setFilteredEnrollments(result);
+  }, [filter, enrollments]);
 
   if (loading) {
     return (
@@ -114,54 +129,70 @@ export default function CourseDashboardPage() {
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden mb-8">
-        <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+        <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <BrainCircuit className="w-5 h-5 text-indigo-500" />
             Enrolled Students Activity
           </h2>
-          <button className="text-slate-500 hover:text-blue-600 text-sm font-bold transition-colors">
-            Export CSV
-          </button>
+          
+          <div className="flex bg-slate-50 dark:bg-slate-900 p-1 rounded-xl border border-slate-100 dark:border-slate-800">
+            {(['all', 'starting', 'halfway', 'completed'] as const).map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                  filter === f 
+                    ? 'bg-white dark:bg-slate-800 text-blue-600 shadow-sm' 
+                    : 'text-slate-400 hover:text-slate-600'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
         
-        {enrollments.length === 0 ? (
+        {filteredEnrollments.length === 0 ? (
           <div className="p-12 text-center">
             <Users className="w-12 h-12 mx-auto text-slate-300 dark:text-slate-600 mb-4" />
-            <p className="text-slate-500 dark:text-slate-400 font-medium">No students enrolled yet.</p>
+            <p className="text-slate-500 dark:text-slate-400 font-medium">No students match this filter.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700">
                 <tr>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Student ID</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Student Info</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Enrolled At</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Progress</th>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Completed Lessons</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Lessons</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
-                {enrollments.map((enrollment, index) => (
+                {filteredEnrollments.map((enrollment, index) => (
                   <tr key={enrollment.id || index} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">
-                      {enrollment.userId || 'Unknown'}
+                    <td className="px-6 py-4">
+                      <div className="flex flex-col">
+                        <span className="font-bold text-slate-900 dark:text-white uppercase tracking-tight">{enrollment.userName || 'Anonymous'}</span>
+                        <span className="text-[10px] text-slate-400 font-medium">{enrollment.userEmail || 'No Email'}</span>
+                      </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                    <td className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400">
                       {enrollment.enrolledAt?.toDate?.()?.toLocaleDateString() || 'Recent'}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden max-w-[120px]">
+                        <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden max-w-[100px]">
                           <div 
-                            className="h-full bg-blue-500 rounded-full" 
+                            className="h-full bg-blue-500 rounded-full transition-all duration-1000" 
                             style={{ width: `${enrollment.progress || 0}%` }}
                           />
                         </div>
-                        <span className="text-xs font-bold text-slate-600 dark:text-slate-300">{enrollment.progress || 0}%</span>
+                        <span className="text-[10px] font-black text-slate-600 dark:text-slate-300">{enrollment.progress || 0}%</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-300 gap-1.5 flex flex-wrap">
-                      {(enrollment.completedLessons || []).length} / {course.totalModules * 2 /* rough estimate */}
+                    <td className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400">
+                      {(enrollment.completedLessons || []).length} COMPLETED
                     </td>
                   </tr>
                 ))}

@@ -123,6 +123,48 @@ export async function getRecommendedPaths(): Promise<LearningPath[]> {
   }
 }
 
+export async function enrollInCourse(pathId: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Auth required");
+
+  try {
+    const enrollmentId = `${user.uid}_${pathId}`;
+    const enrollmentRef = doc(db, 'enrollments', enrollmentId);
+    const enrollmentSnap = await getDoc(enrollmentRef);
+
+    if (enrollmentSnap.exists()) return; // Already enrolled
+
+    const courseRef = doc(db, FIRESTORE_COLLECTIONS.LEARNING_PATHS, pathId);
+    
+    // Create enrollment record
+    await setDoc(enrollmentRef, {
+      userId: user.uid,
+      courseId: pathId,
+      userName: user.displayName || 'Anonymous User',
+      userEmail: user.email || 'N/A',
+      progress: 0,
+      completedLessons: [],
+      enrolledAt: serverTimestamp(),
+      lastUpdated: serverTimestamp()
+    });
+
+    // Create initial progress record
+    const progressRef = doc(db, FIRESTORE_COLLECTIONS.USERS, user.uid, FIRESTORE_COLLECTIONS.LEARNING_PROGRESS, pathId);
+    await setDoc(progressRef, { 
+      completedLessons: [], 
+      lastUpdated: serverTimestamp() 
+    });
+
+    // Increment global counter
+    await updateDoc(courseRef, {
+      enrolledCount: increment(1)
+    });
+  } catch (error) {
+    console.error("Error enrolling in course:", error);
+    throw error;
+  }
+}
+
 export async function updateLessonProgress(pathId: string, moduleId: string, lessonId: string, isCompleted: boolean): Promise<void> {
   const user = auth.currentUser;
   if (!user) return;

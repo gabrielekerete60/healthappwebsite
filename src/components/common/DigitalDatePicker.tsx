@@ -84,7 +84,7 @@ export default function DigitalDatePicker({
       >
         <div className="flex items-center gap-3">
           <CalendarIcon className="w-5 h-5 text-slate-400" />
-          <span className={selectedDate ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500 font-normal"}>
+          <span className={`text-sm font-black ${selectedDate ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500"}`}>
             {selectedDate ? format(selectedDate, 'PPP') : "Select your date of birth"}
           </span>
         </div>

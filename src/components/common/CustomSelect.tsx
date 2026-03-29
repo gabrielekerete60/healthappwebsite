@@ -76,7 +76,7 @@ export default function CustomSelect({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full px-6 py-4 rounded-[20px] bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-white/5 flex items-center justify-between outline-none transition-all font-bold text-slate-900 dark:text-white shadow-sm hover:border-blue-400/30 focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 ${isOpen ? 'bg-white dark:bg-slate-900 border-blue-500/50 ring-4 ring-blue-500/10' : ''} ${className}`}
       >
-        <span className={`truncate mr-2 ${value ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500 font-normal'}`}>
+        <span className={`truncate mr-2 text-sm font-black ${value ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'}`}>
           {selectedLabel}
         </span>
         <div className={`p-1 rounded-full transition-colors ${isOpen ? 'bg-blue-50 dark:bg-blue-900/30' : ''}`}>

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { getLearningPathById, LearningPath, Module, Lesson } from '@/services/learningService';
-import { ArrowLeft, PlayCircle, FileText, CheckCircle, Clock, ChevronDown, ChevronUp, Download, Lock, Check, Award, Circle } from 'lucide-react';
+import { getLearningPathById, LearningPath, Module, Lesson, enrollInCourse } from '@/services/learningService';
+import { ArrowLeft, PlayCircle, FileText, CheckCircle, Clock, ChevronDown, ChevronUp, Download, Lock, Check, Award, Circle, GraduationCap, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
@@ -15,13 +15,17 @@ export default function CourseDetailPage() {
   const id = params.id as string;
   const [path, setPath] = useState<LearningPath | null>(null);
   const [loading, setLoading] = useState(true);
+  const [enrolling, setEnrolling] = useState(false);
+  const [isEnrolled, setIsEnrolled] = useState(false);
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState(false);
   const [modalConfig, setModalConfig] = useState<{
     isOpen: boolean;
     title: string;
     description: string;
-    type: 'success' | 'warning' | 'info';
+    type: 'success' | 'warning' | 'info' | 'upgrade';
+    confirmText?: string;
+    onConfirm?: () => void;
   }>({
     isOpen: false,
     title: '',
@@ -34,7 +38,9 @@ export default function CourseDetailPage() {
       isOpen: true,
       title,
       description,
-      type
+      type,
+      confirmText: 'Got it',
+      onConfirm: () => setModalConfig(prev => ({ ...prev, isOpen: false }))
     });
   };
 
@@ -43,12 +49,37 @@ export default function CourseDetailPage() {
       const data = await getLearningPathById(id);
       if (data) {
         setPath(data);
+        setIsEnrolled(data.progress !== undefined && data.progress >= 0);
         if (data.modules.length) setExpandedModule(data.modules[0].id);
       }
       setLoading(false);
     };
     fetchPath();
   }, [id]);
+
+  const handleEnroll = async () => {
+    setModalConfig({
+      isOpen: true,
+      title: 'Enroll in Academy Course',
+      description: `You are about to register for "${path?.title}". This will track your clinical progress and sync your achievement to the network registry. Do you wish to continue?`,
+      type: 'info',
+      confirmText: 'YES, ENROLL',
+      onConfirm: async () => {
+        setEnrolling(true);
+        try {
+          await enrollInCourse(id);
+          setIsEnrolled(true);
+          setModalConfig(prev => ({ ...prev, isOpen: false }));
+          showAlert('Enrollment Successful', 'You are now registered for this course. Your clinical progress node is active.', 'success');
+        } catch (error) {
+          console.error("Enrollment failed:", error);
+          showAlert('Enrollment Failed', 'Failed to register. Please check your connection.', 'warning');
+        } finally {
+          setEnrolling(false);
+        }
+      }
+    });
+  };
 
   const handleDownload = () => {
     setIsOffline(true);
@@ -87,29 +118,42 @@ export default function CourseDetailPage() {
             
             <div className="flex flex-col items-center gap-4 shrink-0">
               <div className="text-center bg-white dark:bg-slate-800 px-8 py-6 rounded-[32px] border border-slate-100 dark:border-slate-700 shadow-sm w-full">
-                <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">{path.progress}%</div>
+                <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">{path.progress || 0}%</div>
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('complete')}</div>
               </div>
               
               <div className="flex flex-col gap-3 w-full">
-                {path.progress === 100 && (
-                  <Link
-                    href={`/learning/certificate/${path.id}`}
-                    className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg shadow-amber-200 dark:shadow-none active:scale-95"
-                  >
-                    <Award className="w-4 h-4" />
-                    {t('claimCertificate')}
-                  </Link>
-                )}
-                
-                {!isOffline && (
+                {!isEnrolled ? (
                   <button
-                    onClick={handleDownload}
-                    className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-400 transition-all shadow-lg active:scale-95"
+                    onClick={handleEnroll}
+                    disabled={enrolling}
+                    className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 dark:shadow-none active:scale-95 disabled:opacity-50"
                   >
-                    <Download className="w-4 h-4" />
-                    {t('download')}
+                    {enrolling ? <Loader2 className="w-4 h-4 animate-spin" /> : <GraduationCap className="w-4 h-4" />}
+                    Enroll Now
                   </button>
+                ) : (
+                  <>
+                    {path.progress === 100 && (
+                      <Link
+                        href={`/learning/certificate/${path.id}`}
+                        className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg shadow-amber-200 dark:shadow-none active:scale-95"
+                      >
+                        <Award className="w-4 h-4" />
+                        {t('claimCertificate')}
+                      </Link>
+                    )}
+                    
+                    {!isOffline && (
+                      <button
+                        onClick={handleDownload}
+                        className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-400 transition-all shadow-lg active:scale-95"
+                      >
+                        <Download className="w-4 h-4" />
+                        {t('download')}
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -119,91 +163,108 @@ export default function CourseDetailPage() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-16">
-        <div className="space-y-6">
-          {path.modules.map((module, index) => (
-            <div key={module.id} className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <button 
-                onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
-                className="w-full flex items-center justify-between p-8 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left"
-              >
-                <div className="flex items-center gap-6">
-                  <div className="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 font-black text-sm border border-slate-200 dark:border-slate-700 shadow-sm">
-                    {index + 1}
+        {!isEnrolled ? (
+          <div className="bg-white dark:bg-slate-900 rounded-[48px] p-12 text-center border border-slate-100 dark:border-white/5 shadow-3xl">
+            <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-8">
+              <Lock className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-4">Curriculum Locked</h2>
+            <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto font-medium mb-10">Please enroll in this course to gain full clinical access to the learning modules and certification path.</p>
+            <button
+              onClick={handleEnroll}
+              className="px-10 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl active:scale-95"
+            >
+              Start My Enrollment
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {path.modules.map((module, index) => (
+              <div key={module.id} className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <button 
+                  onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
+                  className="w-full flex items-center justify-between p-8 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left"
+                >
+                  <div className="flex items-center gap-6">
+                    <div className="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 font-black text-sm border border-slate-200 dark:border-slate-700 shadow-sm">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">{t('modules')} {index + 1}</p>
+                      <h3 className="font-black text-xl text-slate-900 dark:text-white uppercase tracking-tight">{module.title}</h3>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">{t('modules')} {index + 1}</p>
-                    <h3 className="font-black text-xl text-slate-900 dark:text-white uppercase tracking-tight">{module.title}</h3>
-                  </div>
-                </div>
-                {expandedModule === module.id ? <ChevronUp className="text-slate-400" /> : <ChevronDown className="text-slate-400" />}
-              </button>
+                  {expandedModule === module.id ? <ChevronDown className="text-slate-400 rotate-180 transition-transform" /> : <ChevronDown className="text-slate-400 transition-transform" />}
+                </button>
 
-              <AnimatePresence>
-                {expandedModule === module.id && (
-                  <motion.div 
-                    initial={{ height: 0 }}
-                    animate={{ height: 'auto' }}
-                    exit={{ height: 0 }}
-                    className="overflow-hidden border-t border-slate-100 dark:border-slate-800"
-                  >
-                    <div className="divide-y divide-slate-100 dark:divide-slate-800 bg-slate-50/30 dark:bg-black/10">
-                      {module.lessons.map((lesson) => (
-                        <Link 
-                          key={lesson.id} 
-                          href={`/learning/${path.id}/lesson/${lesson.id}`}
-                          className="p-6 pl-24 pr-8 flex items-center justify-between hover:bg-white dark:hover:bg-slate-800 transition-colors group"
-                        >
-                          <div className="flex items-center gap-5">
-                            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800 shadow-sm text-slate-400 group-hover:text-blue-600 transition-colors">
-                              {lesson.type === 'video' ? <PlayCircle className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
-                            </div>
-                            <div>
-                              <p className="font-black text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight text-sm">{lesson.title}</p>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-widest">
-                                  <Clock className="w-3 h-3" /> {lesson.duration}
-                                </span>
+                <AnimatePresence>
+                  {expandedModule === module.id && (
+                    <motion.div 
+                      initial={{ height: 0 }}
+                      animate={{ height: 'auto' }}
+                      exit={{ height: 0 }}
+                      className="overflow-hidden border-t border-slate-100 dark:border-slate-800"
+                    >
+                      <div className="divide-y divide-slate-100 dark:divide-slate-800 bg-slate-50/30 dark:bg-black/10">
+                        {module.lessons.map((lesson) => (
+                          <Link 
+                            key={lesson.id} 
+                            href={`/learning/${path.id}/lesson/${lesson.id}`}
+                            className="p-6 pl-24 pr-8 flex items-center justify-between hover:bg-white dark:hover:bg-slate-800 transition-colors group"
+                          >
+                            <div className="flex items-center gap-5">
+                              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800 shadow-sm text-slate-400 group-hover:text-blue-600 transition-colors">
+                                {lesson.type === 'video' ? <PlayCircle className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
+                              </div>
+                              <div>
+                                <p className="font-black text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight text-sm">{lesson.title}</p>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-widest">
+                                    <Clock className="w-3 h-3" /> {lesson.duration}
+                                  </span>
+                                </div>
                               </div>
                             </div>
-                          </div>
 
-                          <div className="flex items-center gap-6">
-                            <div className="px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 dark:group-hover:bg-blue-500 dark:group-hover:border-blue-500 transition-all flex items-center gap-1 shadow-sm">
-                              {lesson.type === 'video' ? 'WATCH' : 'READ'}
+                            <div className="flex items-center gap-6">
+                              <div className="px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 dark:group-hover:bg-blue-500 dark:group-hover:border-blue-500 transition-all flex items-center gap-1 shadow-sm">
+                                {lesson.type === 'video' ? 'WATCH' : 'READ'}
+                              </div>
+                              <div className="text-slate-300 dark:text-slate-700 transition-colors">
+                                {lesson.isCompleted ? (
+                                  <CheckCircle className="w-7 h-7 text-emerald-500" />
+                                ) : (
+                                  <Circle className="w-7 h-7" />
+                                )}
+                              </div>
                             </div>
-                            <div className="text-slate-300 dark:text-slate-700 transition-colors">
-                              {lesson.isCompleted ? (
-                                <CheckCircle className="w-7 h-7 text-emerald-500" />
-                              ) : (
-                                <Circle className="w-7 h-7" />
-                              )}
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-          
-          {path.modules.length === 0 && (
-            <div className="text-center py-24 bg-white dark:bg-slate-900 rounded-[48px] border border-dashed border-slate-300 dark:border-slate-700">
-              <Lock className="w-10 h-10 text-slate-300 dark:text-slate-700 mx-auto mb-4" />
-              <p className="text-slate-500 dark:text-slate-400 font-black uppercase tracking-widest text-xs">{t('modulesComingSoon')}</p>
-            </div>
-          )}
-        </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+            
+            {path.modules.length === 0 && (
+              <div className="text-center py-24 bg-white dark:bg-slate-900 rounded-[48px] border border-dashed border-slate-300 dark:border-slate-700">
+                <Lock className="w-10 h-10 text-slate-300 dark:text-slate-700 mx-auto mb-4" />
+                <p className="text-slate-500 dark:text-slate-400 font-black uppercase tracking-widest text-xs">{t('modulesComingSoon')}</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <NiceModal 
         isOpen={modalConfig.isOpen}
         onClose={() => setModalConfig(prev => ({ ...prev, isOpen: false }))}
+        onConfirm={modalConfig.onConfirm}
         title={modalConfig.title}
         description={modalConfig.description}
         type={modalConfig.type}
-        confirmText="Got it"
+        confirmText={modalConfig.confirmText || "Got it"}
       />
     </div>
   );

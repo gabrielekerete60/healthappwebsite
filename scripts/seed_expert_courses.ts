@@ -1,12 +1,10 @@
-export {};
-
-const admin = require('firebase-admin');
-const fs = require('fs');
-const path = require('path');
+import admin from 'firebase-admin';
+import fs from 'fs';
+import path from 'path';
 
 // Configuration for local emulator or production
 function getServiceAccount() {
-    const envPath = path.join(process.cwd(), 'web-platform', '.env.local');
+    const envPath = path.join(process.cwd(), '.env.local');
     if (fs.existsSync(envPath)) {
         const envContent = fs.readFileSync(envPath, 'utf8');
         
@@ -152,6 +150,14 @@ async function seed() {
     const existingPaths = await learningPathsRef.get();
     console.log(`Clearing ${existingPaths.size} existing learning paths to prepare for real sync...`);
     for (const doc of existingPaths.docs) {
+        await doc.ref.delete();
+    }
+
+    // Clear all enrollments
+    const enrollmentsRef = db.collection('enrollments');
+    const existingEnrolls = await enrollmentsRef.get();
+    console.log(`Clearing ${existingEnrolls.size} existing enrollment records...`);
+    for (const doc of existingEnrolls.docs) {
         await doc.ref.delete();
     }
 
