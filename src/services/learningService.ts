@@ -1,5 +1,5 @@
 import { db, auth } from '@/lib/firebase';
-import { collection, getDocs, doc, getDoc, setDoc, query, orderBy, limit, serverTimestamp, addDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, setDoc, query, orderBy, limit, serverTimestamp, addDoc, updateDoc, increment, where } from 'firebase/firestore';
 import { FIRESTORE_COLLECTIONS } from '@/lib/constants';
 import { getUserSubcollection } from '@/lib/firestoreUtils';
 
@@ -132,6 +132,8 @@ export async function updateLessonProgress(pathId: string, moduleId: string, les
     const progressSnap = await getDoc(progressRef);
     
     let completedLessons: string[] = [];
+    const isNewEnrollment = !progressSnap.exists();
+
     if (progressSnap.exists()) {
       completedLessons = progressSnap.data().completedLessons || [];
     }
@@ -143,7 +145,49 @@ export async function updateLessonProgress(pathId: string, moduleId: string, les
       completedLessons = completedLessons.filter(id => id !== uniqueId);
     }
 
+    // 1. Update User's Personal Progress
     await setDoc(progressRef, { completedLessons, lastUpdated: serverTimestamp() }, { merge: true });
+
+    // 2. Handle Global Enrollment and Statistics
+    if (isCompleted) {
+      const enrollmentId = `${user.uid}_${pathId}`;
+      const enrollmentRef = doc(db, 'enrollments', enrollmentId);
+      
+      const courseRef = doc(db, FIRESTORE_COLLECTIONS.LEARNING_PATHS, pathId);
+      const courseSnap = await getDoc(courseRef);
+      let progressPercent = 0;
+      
+      if (courseSnap.exists()) {
+        const courseData = courseSnap.data();
+        const totalLessons = (courseData.modules || []).reduce((acc: number, m: any) => acc + (m.lessons || []).length, 0);
+        progressPercent = totalLessons > 0 ? Math.round((completedLessons.length / totalLessons) * 100) : 0;
+      }
+
+      if (isNewEnrollment) {
+        // Create new enrollment record
+        await setDoc(enrollmentRef, {
+          userId: user.uid,
+          courseId: pathId,
+          userName: user.displayName || 'Anonymous User',
+          progress: progressPercent,
+          completedLessons,
+          enrolledAt: serverTimestamp(),
+          lastUpdated: serverTimestamp()
+        });
+
+        // Increment global counter on the course itself
+        await updateDoc(courseRef, {
+          enrolledCount: increment(1)
+        });
+      } else {
+        // Update existing enrollment
+        await updateDoc(enrollmentRef, {
+          progress: progressPercent,
+          completedLessons,
+          lastUpdated: serverTimestamp()
+        });
+      }
+    }
   } catch (error) {
     console.error("Error updating lesson progress:", error);
   }

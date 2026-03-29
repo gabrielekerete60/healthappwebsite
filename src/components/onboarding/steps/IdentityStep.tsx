@@ -68,9 +68,9 @@ export default function IdentityStep({
   };
 
   const getInputClassName = (field: string, isInvalid: boolean) => `
-    w-full px-6 py-5 rounded-[24px] bg-white dark:bg-slate-900 border-2 
+    w-full px-6 py-4 rounded-[20px] bg-slate-50 dark:bg-slate-800/50 border-2 
     outline-none transition-all font-black text-slate-900 dark:text-white text-sm shadow-sm
-    ${focusedField === field ? 'border-blue-500 ring-8 ring-blue-500/5 shadow-xl' : 
+    ${focusedField === field ? 'border-blue-500 bg-white dark:bg-slate-900 ring-8 ring-blue-500/5 shadow-xl' : 
       isInvalid ? 'border-red-500' : 'border-slate-100 dark:border-white/5 hover:border-slate-200 dark:hover:border-white/10'}
   `.trim();
 
@@ -170,7 +170,6 @@ export default function IdentityStep({
                     onChange={(val) => setFormData({ ...formData, ageRange: val })}
                     options={['18-24', '25-34', '35-44', '45-54', '55+'].map(a => ({ value: a, label: a }))}
                     placeholder={t('ageRange')}
-                    className="shadow-sm border-2 border-slate-100 dark:border-white/5"
                   />
                 </div>
               </div>
@@ -187,7 +186,6 @@ export default function IdentityStep({
                   onChange={(val) => setFormData({ ...formData, countryCode: val })}
                   options={countryData.map(c => ({ value: c.code, label: `${c.flag} ${c.code}` }))}
                   placeholder="+1"
-                  className="shadow-sm border-2 border-slate-100 dark:border-white/5"
                 />
               </div>
               <div className="relative flex-1">

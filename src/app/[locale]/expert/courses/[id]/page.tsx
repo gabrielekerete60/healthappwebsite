@@ -37,7 +37,7 @@ export default function CourseDashboardPage() {
 
   if (loading) {
     return (
-      <ExpertLayout title="Course Dashboard" backLink="/expert/courses">
+      <ExpertLayout title="Course Dashboard" backLink="/expert/dashboard?tab=courses">
         <div className="flex flex-col items-center justify-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-slate-500 font-medium tracking-wide">Loading course details...</p>
@@ -48,7 +48,7 @@ export default function CourseDashboardPage() {
 
   if (!course) {
     return (
-      <ExpertLayout title="Course Not Found" backLink="/expert/courses">
+      <ExpertLayout title="Course Not Found" backLink="/expert/dashboard?tab=courses">
         <div className="p-12 text-center text-slate-500">The course you are looking for does not exist or has been deleted.</div>
       </ExpertLayout>
     );
@@ -78,7 +78,7 @@ export default function CourseDashboardPage() {
     <ExpertLayout
       title={course.title}
       subtitle="Course Dashboard - Analytics & Student Progress"
-      backLink="/expert/courses"
+      backLink="/expert/dashboard?tab=courses"
       actions={actions}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

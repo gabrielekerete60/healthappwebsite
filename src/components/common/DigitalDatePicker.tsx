@@ -80,7 +80,7 @@ export default function DigitalDatePicker({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-6 py-5 rounded-[24px] bg-white dark:bg-slate-900 border ${error ? 'border-red-500' : 'border-slate-200 dark:border-slate-800'} flex items-center justify-between outline-none transition-all font-bold text-slate-900 dark:text-white shadow-sm hover:border-blue-400 dark:hover:border-blue-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 ${isOpen ? 'border-blue-500 ring-4 ring-blue-500/10' : ''}`}
+        className={`w-full px-6 py-4 rounded-[20px] bg-slate-50 dark:bg-slate-800/50 border-2 ${error ? 'border-red-500' : 'border-slate-100 dark:border-white/5'} flex items-center justify-between outline-none transition-all font-bold text-slate-900 dark:text-white shadow-sm hover:border-blue-400/30 focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 ${isOpen ? 'bg-white dark:bg-slate-900 border-blue-500/50 ring-4 ring-blue-500/10' : ''}`}
       >
         <div className="flex items-center gap-3">
           <CalendarIcon className="w-5 h-5 text-slate-400" />
