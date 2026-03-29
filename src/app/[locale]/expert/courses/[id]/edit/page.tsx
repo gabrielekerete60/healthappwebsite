@@ -74,7 +74,7 @@ export default function EditCoursePage() {
           status,
         });
         
-        router.push(\`/expert/courses/\${id}\`);
+        router.push(`/expert/courses/${id}`);
       }
     } catch (err: any) {
       setError(err.message || 'Failed to update course');
@@ -85,7 +85,7 @@ export default function EditCoursePage() {
 
   if (initialLoading) {
     return (
-      <ExpertLayout title="Edit Course" backLink={\`/expert/courses/\${id}\`}>
+      <ExpertLayout title="Edit Course" backLink={`/expert/courses/${id}`}>
         <div className="flex flex-col items-center justify-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-slate-500 font-medium tracking-wide">Loading course builder...</p>
@@ -119,7 +119,7 @@ export default function EditCoursePage() {
     <ExpertLayout
       title="Edit Course"
       subtitle="Update course content, adjust curriculum, and manage settings."
-      backLink={\`/expert/courses/\${id}\`}
+      backLink={`/expert/courses/${id}`}
       actions={actions}
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

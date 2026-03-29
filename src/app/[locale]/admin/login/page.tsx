@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, Loader2 } from 'lucide-react';
 import { PasswordField } from '@/components/common/PasswordField';
+import { motion } from 'framer-motion';
 
 import { auth } from '@/lib/firebase';
 

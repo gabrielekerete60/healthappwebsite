@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Loader2, Mail, ArrowRight, Ticket } from 'lucide-react';
+import { Loader2, Mail, ArrowRight, Ticket, ShieldCheck } from 'lucide-react';
 import { BaseInput } from '@/components/common/BaseInput';
 import { PasswordField } from '@/components/common/PasswordField';
 

@@ -1,3 +1,5 @@
+export {};
+
 const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
@@ -514,7 +516,7 @@ async function seed() {
             emailVerified: true
         });
         console.log(`Expert user ${EXPERT_EMAIL} created in Auth.`);
-    } catch (err) {
+    } catch (err: any) {
         if (err.code === 'auth/uid-already-exists' || err.code === 'auth/email-already-exists') {
             console.log("Expert user already exists in Auth.");
         } else {

@@ -95,11 +95,11 @@ export default function CoursesManagementPage() {
             <div key={course.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-md transition-all group">
               <div className="p-6 border-b border-slate-100 dark:border-slate-700">
                 <div className="flex justify-between items-start mb-4">
-                  <span className={\`inline-flex px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full \${course.status === 'published' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400'}\`}>
+                  <span className={`inline-flex px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full ${course.status === 'published' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400'}`}>
                     {course.status || 'Draft'}
                   </span>
                   <div className="flex gap-2 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Link href={\`/expert/courses/\${course.id}/edit\`} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-blue-600 dark:text-blue-400">
+                    <Link href={`/expert/courses/${course.id}/edit`} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-blue-600 dark:text-blue-400">
                       <Edit className="w-4 h-4" />
                     </Link>
                     <button onClick={() => handleDelete(course.id)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-red-500 dark:text-red-400">
@@ -126,7 +126,7 @@ export default function CoursesManagementPage() {
                 </div>
                 
                 <Link 
-                  href={\`/expert/courses/\${course.id}\`}
+                  href={`/expert/courses/${course.id}`}
                   className="text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:text-blue-700 transition-colors"
                 >
                   Manage
