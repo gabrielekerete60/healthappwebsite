@@ -234,9 +234,12 @@ Add 2-3 drops of lavender oil to a teaspoon of aloe vera gel or a carrier oil an
             id: 'l1', 
             title: 'What is Hypertension?', 
             duration: '10m', 
-            type: 'article',
+            type: 'video',
+            videoUrl: 'https://www.youtube.com/embed/tYbJ-yR3vN8',
             content: `
 # Understanding Hypertension
+
+*Please watch the video above for a complete medical breakdown, or read the summary below.*
 
 Hypertension, commonly known as high blood pressure, is a condition where the force of the blood against your artery walls is high enough that it may eventually cause health problems, such as heart disease.
 

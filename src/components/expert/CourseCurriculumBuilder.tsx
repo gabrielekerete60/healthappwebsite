@@ -125,6 +125,21 @@ export const CourseCurriculumBuilder: React.FC<CourseCurriculumBuilderProps> = (
                         placeholder="Duration (e.g. 10m)"
                       />
                     </div>
+                    {lesson.type === 'video' ? (
+                      <input
+                        className="text-xs text-slate-700 dark:text-slate-300 w-full bg-slate-50 dark:bg-slate-900/50 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 outline-none focus:border-blue-500 mb-1"
+                        placeholder="Video URL (e.g., https://www.youtube.com/embed/...)"
+                        value={lesson.videoUrl || ''}
+                        onChange={(e) => updateLesson(module.id, lesson.id, { videoUrl: e.target.value })}
+                      />
+                    ) : (
+                      <textarea
+                        className="text-sm text-slate-700 dark:text-slate-300 w-full bg-slate-50 dark:bg-slate-900/50 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 outline-none focus:border-blue-500 min-h-[120px] mb-1 font-mono"
+                        placeholder="Write your lesson content here. Markdown is supported (e.g., # Heading, **bold**)."
+                        value={lesson.content || ''}
+                        onChange={(e) => updateLesson(module.id, lesson.id, { content: e.target.value })}
+                      />
+                    )}
                   </div>
                   <button 
                     onClick={() => deleteLesson(module.id, lesson.id)}

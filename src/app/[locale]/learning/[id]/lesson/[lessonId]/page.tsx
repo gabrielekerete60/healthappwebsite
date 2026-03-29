@@ -16,6 +16,7 @@ export default function LessonPage() {
 
   const [path, setPath] = useState<LearningPath | null>(null);
   const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
+  const [nextLesson, setNextLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
   const [completing, setLoadingComplete] = useState(false);
 
@@ -26,11 +27,21 @@ export default function LessonPage() {
         setPath(data);
         // Find the lesson in modules
         let foundLesson: Lesson | null = null;
+        let next: Lesson | null = null;
+        const flatLessons: Lesson[] = [];
         data.modules.forEach(m => {
-          const l = m.lessons.find(less => less.id === lessonId);
-          if (l) foundLesson = l;
+          m.lessons.forEach(l => flatLessons.push(l));
         });
+        
+        const currentIndex = flatLessons.findIndex(l => l.id === lessonId);
+        if (currentIndex !== -1) {
+          foundLesson = flatLessons[currentIndex];
+          if (currentIndex < flatLessons.length - 1) {
+            next = flatLessons[currentIndex + 1];
+          }
+        }
         setCurrentLesson(foundLesson);
+        setNextLesson(next);
       }
       setLoading(false);
     };
@@ -49,8 +60,12 @@ export default function LessonPage() {
 
     try {
       await updateLessonProgress(path.id, moduleId, lessonId, true);
-      // Refresh local state or just redirect
-      router.push(`/learning/${path.id}`);
+      // Redirect to next lesson or return to course home
+      if (nextLesson) {
+        router.push(`/learning/${path.id}/lesson/${nextLesson.id}`);
+      } else {
+        router.push(`/learning/${path.id}`);
+      }
     } catch (error) {
       console.error("Failed to complete lesson:", error);
     } finally {
@@ -146,18 +161,29 @@ export default function LessonPage() {
             </div>
           </header>
 
-          {/* Video Placeholder if type is video */}
+          {/* Video Player or Placeholder */}
           {currentLesson.type === 'video' && (
-            <div className="mb-16 aspect-video bg-slate-900 rounded-[40px] border border-white/5 flex flex-col items-center justify-center text-center p-12 group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-50" />
-              <div className="relative z-10">
-                <div className="w-20 h-20 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/20">
-                  <PlayCircle size={40} className="text-white fill-white/20" />
-                </div>
-                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">Video Content Node</h3>
-                <p className="text-slate-400 text-sm max-w-sm mx-auto font-medium">Video playback is restricted to ELITE medical nodes. Standard protocols use documentation only.</p>
+            currentLesson.videoUrl ? (
+              <div className="mb-16 aspect-video bg-black rounded-[40px] border border-slate-200 dark:border-white/5 overflow-hidden shadow-2xl">
+                <iframe
+                  src={currentLesson.videoUrl.replace('watch?v=', 'embed/').split('&')[0]} 
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
-            </div>
+            ) : (
+              <div className="mb-16 aspect-video bg-slate-900 rounded-[40px] border border-white/5 flex flex-col items-center justify-center text-center p-12 group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-50" />
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/20 mx-auto">
+                    <PlayCircle size={40} className="text-white fill-white/20" />
+                  </div>
+                  <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">Video Content Missing</h3>
+                  <p className="text-slate-400 text-sm max-w-sm mx-auto font-medium">The instructor has not provided a valid video URL for this lesson.</p>
+                </div>
+              </div>
+            )
           )}
 
           {/* Article Content */}
@@ -185,13 +211,18 @@ export default function LessonPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
               <div className="flex-1 text-center sm:text-left">
                 <h4 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-2">Next Step</h4>
-                <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Complete this module to unlock advanced protocols.</p>
+                <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                  {nextLesson ? `Up Next: ${nextLesson.title}` : 'You have reached the end of this course!'}
+                </p>
               </div>
               <button 
                 onClick={handleComplete}
-                className="w-full sm:w-auto px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[24px] font-black uppercase tracking-widest text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-2xl"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[24px] font-black uppercase tracking-widest text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-2xl disabled:opacity-50"
+                disabled={completing}
               >
-                Complete & Return
+                {completing ? <Loader2 size={16} className="animate-spin" /> : null}
+                {nextLesson ? 'Complete & Continue' : 'Finish Course'}
+                {nextLesson && <ChevronRight size={16} />}
               </button>
             </div>
           </footer>

@@ -8,6 +8,8 @@ export interface Lesson {
   title: string;
   duration: string;
   type: 'video' | 'article' | 'quiz';
+  content?: string;
+  videoUrl?: string;
   isCompleted?: boolean;
 }
 
