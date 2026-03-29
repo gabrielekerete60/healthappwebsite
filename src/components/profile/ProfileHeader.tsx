@@ -74,11 +74,11 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
   const router = useRouter();
   const t = useTranslations('profile.header');
   const role = userProfile?.role || 'user';
-  const [selectedProtocol, setSelectedProtocol] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
 
-  // Scroll Lock Protocol
+  // Scroll Lock
   React.useEffect(() => {
-    if (selectedProtocol) {
+    if (showDetails) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -86,7 +86,7 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedProtocol]);
+  }, [showDetails]);
 
   const timeLeft = useCountdown(
     userProfile?.tier && userProfile.tier !== 'basic' ? userProfile.subscriptionExpiry || null : null
@@ -98,20 +98,20 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
   };
 
-  const protocols = [
-    { icon: Fingerprint, label: "User ID", value: user.uid, category: "Security" },
-    { icon: Mail, label: "Email", value: user.email || 'NO RECORD', category: "Communication" },
-    { icon: Phone, label: "Phone", value: userProfile?.phone || 'NO RECORD', category: "Communication" },
-    { icon: MapPin, label: "Location", value: userProfile?.country ? `${userProfile.city || 'Central'}, ${userProfile.country}` : 'OFFLINE', category: "Localization" },
+  const accountDetails = [
+    { icon: Fingerprint, label: "Account ID", value: user.uid, category: "Private Info" },
+    { icon: Mail, label: "Email Address", value: user.email || 'NO RECORD', category: "Contact" },
+    { icon: Phone, label: "Phone Number", value: userProfile?.phone || 'NO RECORD', category: "Contact" },
+    { icon: MapPin, label: "Your Location", value: userProfile?.country ? `${userProfile.city || 'Central'}, ${userProfile.country}` : 'OFFLINE', category: "Location" },
     { 
       icon: Calendar, 
-      label: "Member Since", 
+      label: "Joined On", 
       value: formatDateWithTime(userProfile?.createdAt || user.metadata.creationTime), 
-      category: "System" 
+      category: "General" 
     },
-    { icon: Award, label: "Account Plan", value: userProfile?.tier?.toUpperCase() || 'BASIC', category: "Account" },
-    { icon: Shield, label: "Verification", value: userProfile?.verificationLevel?.toString() || '0', category: "Security" },
-    { icon: Activity, label: "Account Status", value: userProfile?.isBanned ? 'RESTRICTED' : 'ACTIVE', category: "System" },
+    { icon: Award, label: "Current Plan", value: userProfile?.tier?.toUpperCase() || 'BASIC', category: "Plan" },
+    { icon: Shield, label: "Identity Check", value: userProfile?.verificationLevel?.toString() || '0', category: "Private Info" },
+    { icon: Activity, label: "Profile Status", value: userProfile?.isBanned ? 'RESTRICTED' : 'ACTIVE', category: "General" },
   ];
 
   return (
@@ -153,17 +153,17 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
               )}
             </div>
 
-            {/* Identity Info */}
+            {/* Profile Info */}
             <div className="flex-1 min-w-0 w-full space-y-8">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                 <div className="space-y-4 text-center sm:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} ACCOUNT</span>
+                    <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{role} Account</span>
                   </div>
                   
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-[1.1] uppercase break-words">
-                    {userProfile?.fullName || user.displayName || 'Personal Profile'}
+                    {userProfile?.fullName || user.displayName || 'My Profile'}
                   </h1>
 
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-2">
@@ -183,33 +183,33 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                 </div>
 
                 <button 
-                  onClick={onEdit}
+                  onClick={() => setShowDetails(true)}
                   className="group/btn flex items-center justify-center gap-3 px-6 py-3.5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-slate-200 dark:shadow-none"
                 >
                   <Settings size={14} className="group-hover/btn:rotate-90 transition-transform duration-500" />
-                  Profile Settings
+                  Account Details
                 </button>
               </div>
 
-              {/* Metadata Grid */}
+              {/* Quick Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-slate-100 dark:border-white/5">
                 <MetadataNode 
                   icon={Mail} 
-                  label="Email Address" 
+                  label="Email" 
                   value={user.email || 'NO RECORD'} 
-                  onClick={() => setSelectedProtocol(true)}
+                  onClick={() => setShowDetails(true)}
                 />
                 <MetadataNode 
                   icon={Phone} 
-                  label="Phone Number" 
+                  label="Phone" 
                   value={userProfile?.phone || 'NO RECORD'} 
-                  onClick={() => setSelectedProtocol(true)}
+                  onClick={() => setShowDetails(true)}
                 />
                 <MetadataNode 
                   icon={MapPin} 
-                  label="Location" 
+                  label="Where you are" 
                   value={userProfile?.country ? `${userProfile.city || 'Central'}, ${userProfile.country}` : 'OFFLINE'} 
-                  onClick={() => setSelectedProtocol(true)}
+                  onClick={() => setShowDetails(true)}
                 />
               </div>
             </div>
@@ -217,15 +217,15 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
         </div>
       </div>
 
-      {/* Protocol Modal */}
+      {/* Account Details Modal */}
       <AnimatePresence>
-        {selectedProtocol && (
+        {showDetails && (
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedProtocol(false)}
+              onClick={() => setShowDetails(false)}
               className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
             />
             
@@ -241,12 +241,12 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">ACCOUNT DETAILS</h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-0.5">Your account information</p>
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">MY ACCOUNT DETAILS</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-0.5">Your personal information</p>
                   </div>
                 </div>
                 <button 
-                  onClick={() => setSelectedProtocol(false)}
+                  onClick={() => setShowDetails(false)}
                   className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors"
                 >
                   <X className="w-6 h-6 text-slate-400" />
@@ -255,24 +255,24 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
 
               <div className="p-8 max-h-[60vh] overflow-y-auto custom-scrollbar bg-white dark:bg-slate-900">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {protocols.map((protocol, idx) => (
+                  {accountDetails.map((detail, idx) => (
                     <div key={idx} className="p-6 rounded-[32px] bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 group/detail hover:border-blue-500/30 transition-all shadow-sm">
                       <div className="flex items-center gap-4 mb-4">
                         <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-white/10 text-blue-500 group-hover/detail:scale-110 transition-transform shadow-sm">
-                          <protocol.icon size={18} />
+                          <detail.icon size={18} />
                         </div>
-                        <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{protocol.category}</span>
+                        <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{detail.category}</span>
                       </div>
                       <div className="space-y-1">
-                        <span className="block text-[8px] font-black text-slate-400 uppercase tracking-[0.2em]">{protocol.label}</span>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white break-all leading-relaxed">{protocol.value}</p>
-                        {protocol.label === "Member Since" && (
+                        <span className="block text-[8px] font-black text-slate-400 uppercase tracking-[0.2em]">{detail.label}</span>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white break-all leading-relaxed">{detail.value}</p>
+                        {detail.label === "Joined On" && (
                           <AccountAge createdAt={userProfile?.createdAt || user.metadata.creationTime} />
                         )}
-                        {protocol.label === "Account Plan" && userProfile?.tier !== 'vip2' && (
+                        {detail.label === "Current Plan" && userProfile?.tier !== 'vip2' && (
                           <button
                             onClick={() => {
-                              setSelectedProtocol(false);
+                              setShowDetails(false);
                               router.push('/upgrade');
                             }}
                             className="mt-2 flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-600/20"
@@ -287,14 +287,23 @@ export default function ProfileHeader({ user, userProfile, onEdit }: ProfileHead
                 </div>
               </div>
 
-              <div className="p-8 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-white/5">
-                <div className="flex items-center gap-4 px-4 py-3 bg-blue-500/5 rounded-2xl border border-blue-500/10">
+              <div className="p-8 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-6">
+                <div className="flex-1 flex items-center gap-4 px-4 py-3 bg-blue-500/5 rounded-2xl border border-blue-500/10">
                   <Fingerprint className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-                    This profile data is protected using high-security standards. 
-                    Access is restricted to the account owner only.
+                    Your data is safe with us. Only you can see this information.
                   </p>
                 </div>
+                <button 
+                  onClick={() => {
+                    setShowDetails(false);
+                    onEdit();
+                  }}
+                  className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[20px] font-black uppercase tracking-widest text-[10px] hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
+                >
+                  <Settings size={14} />
+                  Change My Info
+                </button>
               </div>
             </motion.div>
           </div>

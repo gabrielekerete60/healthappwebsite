@@ -113,7 +113,7 @@ export default function NiceModal({
               {/* Dynamic Benefits List for Upgrades */}
               {features.length > 0 && (
                 <div className="bg-slate-50 dark:bg-white/5 rounded-3xl p-6 mb-8 text-left space-y-3 border border-slate-100 dark:border-white/5">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Elite Protocol Benefits:</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Premium Benefits:</p>
                   {features.map((feat, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
@@ -132,7 +132,7 @@ export default function NiceModal({
                     disabled={isLoading}
                     className={`w-full py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all active:scale-95 shadow-2xl disabled:opacity-50 ${getButtonClass()}`}
                   >
-                    {isLoading ? "Securing Channel..." : confirmText}
+                    {isLoading ? "Processing..." : confirmText}
                   </button>
                 )}
                 <button

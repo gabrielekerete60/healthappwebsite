@@ -17,7 +17,7 @@ export const ExpertDashboardHeader: React.FC<ExpertDashboardHeaderProps> = ({ on
     <header className="mb-10 flex justify-between items-end">
       <div>
         <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-none mb-3">Expert Dashboard</h1>
-        <p className="text-slate-500 dark:text-slate-400 font-medium italic">Manage your professional content and expert insights.</p>
+        <p className="text-slate-500 dark:text-slate-400 font-medium italic">Manage your articles, courses, and profile.</p>
       </div>
       <div className="flex gap-4">
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

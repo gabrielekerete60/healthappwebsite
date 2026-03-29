@@ -94,13 +94,13 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
         <div className="p-6 sm:p-8 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-slate-800/30">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 dark:text-white">ACCOUNT CONTROLS</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 dark:text-white">SETTINGS & OPTIONS</h3>
           </div>
         </div>
         
         <div className="space-y-6">
           <div className="px-4 pt-4 md:pt-6">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">Account Features</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">Your Features</span>
             <div className="grid grid-cols-2 gap-3 mt-3 px-2">
               {userProfile?.role === 'admin' && (
                 <div className="col-span-2">
@@ -129,8 +129,8 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                   <ProfileMenuItem 
                     href="/expert/setup" 
                     icon={Sparkles} 
-                    label="Verify License" 
-                    subtitle="Verification Required"
+                    label="Verify My License" 
+                    subtitle="Action Required"
                     variant="primary"
                   />
                 </div>
@@ -142,8 +142,8 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                   <ProfileMenuItem 
                     href={isExpert ? "/expert/upgrade" : "/upgrade"} 
                     icon={Zap} 
-                    label="Upgrade Account" 
-                    subtitle="Unlock Benefits"
+                    label="Upgrade My Plan" 
+                    subtitle="Unlock all features"
                     variant="primary"
                   />
                 </div>
@@ -153,20 +153,20 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                 <ProfileMenuItem 
                   href={isExpert ? "/expert/appointments" : "/appointments"} 
                   icon={Calendar} 
-                  label="Appointments" 
+                  label="My Appointments" 
                 />
               </div>
 
               {isPremium ? (
                 <>
                   <div className="col-span-2 sm:col-span-1 lg:col-span-2 xl:col-span-1 border-t border-slate-100 dark:border-white/5 pt-3 sm:border-t-0 sm:pt-0 pb-0">
-                    <ProfileMenuItem href="/vault" icon={Shield} label="Medical Vault" subtitle="Secure Storage" />
+                    <ProfileMenuItem href="/vault" icon={Shield} label="Medical Vault" subtitle="Safe Storage" />
                   </div>
                   <div className="col-span-2 sm:col-span-1 lg:col-span-2 xl:col-span-1">
-                    <ProfileMenuItem href="/journal" icon={BookOpen} label="Health Journal" subtitle="Your entries" />
+                    <ProfileMenuItem href="/journal" icon={BookOpen} label="Health Journal" subtitle="Track your health" />
                   </div>
                   <div className="col-span-2 sm:col-span-1 lg:col-span-2 xl:col-span-1">
-                    <ProfileMenuItem href="/qa" icon={MessageSquare} label="Expert Q&A" subtitle="Ask questions" />
+                    <ProfileMenuItem href="/qa" icon={MessageSquare} label="Expert Q&A" subtitle="Ask a specialist" />
                   </div>
                 </>
               ) : (
@@ -179,11 +179,11 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                       onClick={() => setModalConfig({
                         isOpen: true,
                         title: "Medical Vault Locked",
-                        description: "The Medical Vault requires a Premium Plan for advanced security.",
+                        description: "The Medical Vault requires a Premium Plan for better security.",
                         type: 'upgrade',
                         isPopup: true,
-                        features: ["High-Level Encryption", "Global Data Access"],
-                        confirmText: "Upgrade Plan",
+                        features: ["Top-level security", "Access from anywhere"],
+                        confirmText: "Upgrade My Plan",
                         onConfirm: () => {
                           setModalConfig(prev => ({ ...prev, isOpen: false }));
                           router.push('/upgrade');
@@ -197,7 +197,7 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
           </div>
 
           <div className="px-4">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">System Utilities</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">Tools & Settings</span>
             <div className="flex flex-col gap-3 mt-3 px-2">
 
               {/* Language Selector Node */}
@@ -235,8 +235,8 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                       <Shield size={18} />
                     </div>
                     <div>
-                      <span className="block text-[10px] sm:text-[11px] font-black text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-tight mb-1">Auto-Lock Timer</span>
-                      <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest">HIPAA Compliant</span>
+                      <span className="block text-[10px] sm:text-[11px] font-black text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-tight mb-1">Automatic Log-out</span>
+                      <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest">Safe & Secure</span>
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -255,7 +255,7 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                             { value: '60', label: '60 Minutes' },
                             { value: 'custom', label: 'Custom...' },
                           ]}
-                          placeholder="Select duration"
+                          placeholder="Select time"
                           className="!py-3 !px-5 !rounded-2xl !text-[11px] !bg-white dark:!bg-slate-800 border-slate-100 dark:border-white/10 shadow-sm font-bold tracking-wide"
                         />
                       </div>
@@ -286,16 +286,16 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
 
             <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 mt-3 px-2">
               <div className="col-span-1">
-                <ProfileMenuItem href="/transactions" icon={CreditCard} label="Billing History" />              </div>
+                <ProfileMenuItem href="/transactions" icon={CreditCard} label="My Payments" />              </div>
               <div className="col-span-1">
-                <ProfileMenuItem href="/referrals" icon={UsersIcon} label="Referral Network" />
+                <ProfileMenuItem href="/referrals" icon={UsersIcon} label="Invite Friends" />
               </div>
               
               <div className="col-span-2">
                 <ProfileMenuItem 
                   onClick={handleExport} 
                   icon={Download} 
-                  label="Export My Data" 
+                  label="Download My Info" 
                   isLoading={exporting}
                   rightElement={exporting ? <Loader2 size={16} className="animate-spin text-slate-400" /> : null}
                 />
@@ -306,15 +306,15 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
 
           <div className="h-px bg-slate-100 dark:bg-white/5 my-6 mx-6" />
 
-          {/* Account Security */}
+          {/* Login & Security */}
           <div className="px-4 pb-6">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 mb-3 block">Account Security</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 mb-3 block">Login & Security</span>
             <div className="grid grid-cols-2 gap-3 px-2">
               <div className="col-span-1">
                 <ProfileMenuItem 
                   onClick={handleDelete} 
                   icon={Trash2} 
-                  label="Delete Account" 
+                  label="Delete My Account" 
                   variant="danger"
                   isLoading={processing}
                 />
@@ -324,7 +324,7 @@ export default function ProfileMenu({ userProfile }: ProfileMenuProps) {
                 <ProfileMenuItem 
                   onClick={handleSignOut} 
                   icon={LogOut} 
-                  label="Log Out" 
+                  label="Sign Out" 
                   variant="dark"
                 />
               </div>

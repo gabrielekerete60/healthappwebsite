@@ -15,6 +15,8 @@ export const mapAuthCodeToKey = (code: string): string => {
       return 'auth.errors.userNotFound';
     case 'auth/wrong-password':
       return 'auth.errors.wrongPassword';
+    case 'auth/invalid-credential':
+      return 'auth.errors.invalidCredential';
     case 'auth/weak-password':
       return 'auth.errors.weakPassword';
     case 'auth/network-request-failed':

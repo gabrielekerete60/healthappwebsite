@@ -60,5 +60,14 @@ export const contentService = {
 
   deleteLearningPath: async (id: string) => {
     await deleteDoc(doc(db, 'learningPaths', id));
+  },
+
+  getCourseEnrollments: async (courseId: string) => {
+    const q = query(collection(db, 'enrollments'), where('courseId', '==', courseId));
+    const querySnapshot = await getDocs(q);
+    
+    // We also need user details, but for now we'll return the raw enrollment data
+    // In a real app, we'd join with the users collection
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 };

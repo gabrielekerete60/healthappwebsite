@@ -21,25 +21,25 @@ export const ExpertStatsGrid: React.FC<ExpertStatsGridProps> = ({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
       <ExpertStatCard 
         icon={<Calendar />} 
-        label="Clinical Sessions" 
+        label="Total Appointments" 
         value={appointmentsCount.toString()} 
         color="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400" 
       />
       <ExpertStatCard 
         icon={<Award />} 
-        label="Clinical Impact" 
+        label="My Impact" 
         value={(articlesCount * 10 + coursesCount * 50).toString()} 
         color="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400" 
       />
       <ExpertStatCard 
         icon={<Users />} 
-        label="Global Reach" 
+        label="Total Views" 
         value={views} 
         color="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400" 
       />
       <ExpertStatCard 
         icon={<Star />} 
-        label="Patient Rating" 
+        label="My Rating" 
         value={rating} 
         color="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" 
       />

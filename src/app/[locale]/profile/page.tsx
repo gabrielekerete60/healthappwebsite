@@ -174,7 +174,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Sidebar */}
-          <aside className="w-full lg:col-span-4 space-y-6 order-2 lg:sticky lg:top-24 lg:-mt-2">
+          <aside className="w-full lg:col-span-4 space-y-6 order-2 lg:sticky lg:top-24 lg:-mt-12">
             <div className="w-full">
               <ProfileMenu userProfile={userProfile} />
             </div>
@@ -193,8 +193,8 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <div className="flex-1 relative z-10">
-                  <span className="block text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.2em] mb-1">System Status</span>
-                  <span className="text-[12px] sm:text-[14px] font-black text-slate-800 dark:text-white uppercase tracking-tight">All systems operational</span>
+                  <span className="block text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.2em] mb-1">Connection</span>
+                  <span className="text-[12px] sm:text-[14px] font-black text-slate-800 dark:text-white uppercase tracking-tight">Everything is working great</span>
                 </div>
               </div>
             </div>

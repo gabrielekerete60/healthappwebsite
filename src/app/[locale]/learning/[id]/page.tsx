@@ -148,7 +148,11 @@ export default function CourseDetailPage() {
                   >
                     <div className="divide-y divide-slate-100 dark:divide-slate-800 bg-slate-50/30 dark:bg-black/10">
                       {module.lessons.map((lesson) => (
-                        <div key={lesson.id} className="p-6 pl-24 pr-8 flex items-center justify-between hover:bg-white dark:hover:bg-slate-800 transition-colors group">
+                        <Link 
+                          key={lesson.id} 
+                          href={`/learning/${path.id}/lesson/${lesson.id}`}
+                          className="p-6 pl-24 pr-8 flex items-center justify-between hover:bg-white dark:hover:bg-slate-800 transition-colors group"
+                        >
                           <div className="flex items-center gap-5">
                             <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800 shadow-sm text-slate-400 group-hover:text-blue-600 transition-colors">
                               {lesson.type === 'video' ? <PlayCircle className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
@@ -163,14 +167,14 @@ export default function CourseDetailPage() {
                             </div>
                           </div>
 
-                          <button className="text-slate-300 dark:text-slate-700 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors active:scale-90">
+                          <div className="text-slate-300 dark:text-slate-700 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
                             {lesson.isCompleted ? (
                               <CheckCircle className="w-7 h-7 text-emerald-500" />
                             ) : (
                               <Circle className="w-7 h-7" />
                             )}
-                          </button>
-                        </div>
+                          </div>
+                        </Link>
                       ))}
                     </div>
                   </motion.div>

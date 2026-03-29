@@ -26,6 +26,9 @@ export interface LearningPath {
   progress: number;
   totalModules: number;
   modules: Module[];
+  enrolledCount?: number;
+  status?: string;
+  authorId?: string;
 }
 
 export async function getLearningPaths(): Promise<LearningPath[]> {

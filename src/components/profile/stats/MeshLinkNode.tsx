@@ -37,12 +37,12 @@ export function MeshLinkNode({
           </div>
           <div>
             <h3 className="text-[10px] sm:text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.3em] mb-1">
-              Referral Network
+              Invite Friends
             </h3>
             <div className="flex items-center gap-2">
               <div className={`w-1.5 h-1.5 rounded-full ${hasCode ? 'bg-emerald-500 animate-pulse' : 'bg-slate-300 dark:bg-slate-600'}`} />
               <span className={`text-[9px] font-bold uppercase tracking-widest ${hasCode ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`}>
-                {hasCode ? 'Network Active' : 'Inactive'}
+                {hasCode ? 'Link Active' : 'No Link'}
               </span>
             </div>
           </div>
@@ -57,10 +57,10 @@ export function MeshLinkNode({
               <Activity className="text-slate-400 dark:text-slate-500 w-7 h-7" />
             </div>
             <h4 className="text-[12px] sm:text-[14px] font-black text-slate-800 dark:text-white uppercase tracking-widest mb-3">
-              Referral Inactive
+              No Link Yet
             </h4>
             <p className="text-[11px] sm:text-[12px] text-slate-500 dark:text-slate-400 font-semibold leading-relaxed mb-6 max-w-[280px]">
-              Create your referral network to share your referral code and grow your network.
+              Create an invite link to share with friends and earn points.
             </p>
             
             <button
@@ -76,7 +76,7 @@ export function MeshLinkNode({
                    <Zap size={16} className="text-white dark:text-slate-900 group-hover/genbtn:text-indigo-400 dark:group-hover/genbtn:text-indigo-600 transition-colors" />
                  )}
                  <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-white dark:text-slate-900">
-                   {generating ? 'CREATING...' : 'CREATE REFERRAL CODE'}
+                   {generating ? 'CREATING...' : 'CREATE INVITE LINK'}
                  </span>
               </div>
             </button>
@@ -85,7 +85,7 @@ export function MeshLinkNode({
           <div className="flex flex-col items-center justify-end h-full w-full">
             <div className="w-full bg-slate-50 dark:bg-white/[0.02] p-5 rounded-2xl border border-slate-100 dark:border-white/5 relative overflow-hidden group/codeblock text-center flex flex-col items-center justify-center mb-5">
               <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-2">
-                Referral Code
+                My Invite Code
               </span>
               <code className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 dark:text-white tracking-widest font-mono relative z-10 group-hover/codeblock:scale-105 transition-transform duration-500 w-full text-center">
                 {referralCode}

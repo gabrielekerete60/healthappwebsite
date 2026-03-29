@@ -154,12 +154,18 @@ export default function SignInPage() {
 
             {error && (
               <motion.div 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="p-4 bg-red-500/10 border-l-4 border-red-500 rounded-r-2xl flex items-center gap-3"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-5 bg-red-500/10 border border-red-500/20 rounded-3xl flex items-start gap-4 relative overflow-hidden group/error"
               >
-                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <p className="text-red-500 text-[10px] font-black uppercase tracking-widest leading-tight">{error}</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover/error:opacity-100 transition-opacity" />
+                <div className="shrink-0 w-10 h-10 rounded-2xl bg-red-500 flex items-center justify-center shadow-lg shadow-red-500/20">
+                  <ShieldCheck className="text-white w-5 h-5" />
+                </div>
+                <div className="space-y-1 relative z-10">
+                  <p className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Authentication Alert</p>
+                  <p className="text-red-600 dark:text-red-400 text-[11px] font-bold leading-relaxed">{error}</p>
+                </div>
               </motion.div>
             )}
 

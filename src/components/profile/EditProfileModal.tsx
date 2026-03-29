@@ -91,7 +91,7 @@ export default function EditProfileModal({ isOpen, onClose, initialData, onSave 
                   />
                   <div className="mt-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800/50">
                     <p className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest leading-relaxed">
-                      Security Protocol: To update your number, you must add and verify a new one first. Multiple active nodes prevent account lockout.
+                      To change your phone number, you need to add and verify a new one first. This helps keep your account safe and ensures you can always get back in.
                     </p>
                   </div>
                 </div>

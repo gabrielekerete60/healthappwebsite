@@ -66,9 +66,19 @@ export default function AdminLoginPage() {
           />
 
           {error && (
-            <div className="text-red-600 text-xs font-black uppercase tracking-widest bg-red-50 dark:bg-red-900/20 p-4 rounded-2xl text-center border border-red-100 dark:border-red-900/30 animate-shake">
-              {error}
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="p-5 bg-red-500/10 border border-red-500/20 rounded-3xl flex items-start gap-4"
+            >
+              <div className="shrink-0 w-8 h-8 rounded-xl bg-red-500 flex items-center justify-center shadow-lg shadow-red-500/20">
+                <Lock className="text-white w-4 h-4" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Security Alert</p>
+                <p className="text-red-600 dark:text-red-400 text-[11px] font-bold leading-relaxed">{error}</p>
+              </div>
+            </motion.div>
           )}
 
           <button 

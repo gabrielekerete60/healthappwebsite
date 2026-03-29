@@ -80,7 +80,7 @@ export function IntelPointsNode({ level, points, nextLevelProgress, user }: Inte
         <div className="h-px bg-slate-200 dark:bg-white/5" />
         <div className="flex items-center gap-3 text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
           <RefreshCw size={10} className="animate-spin-slow" />
-          <span>Updating your progress</span>
+          <span>Syncing your level...</span>
         </div>
       </div>
 

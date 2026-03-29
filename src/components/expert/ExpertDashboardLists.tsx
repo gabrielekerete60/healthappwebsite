@@ -18,7 +18,7 @@ export const AppointmentList = ({ appointments }: { appointments: Appointment[] 
           <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800">
             <Calendar className="text-blue-600 dark:text-blue-400 w-5 h-5" />
           </div>
-          <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Consultation Log</h2>
+          <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">My Appointments</h2>
         </div>
         <div className="flex items-center gap-4">
           <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{appointments.length} Total</span>
@@ -69,7 +69,7 @@ export const AppointmentList = ({ appointments }: { appointments: Appointment[] 
                   AI Scribe
                 </button>
                 <Link href={`/expert/appointments/${app.id}`} className="px-6 py-4 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl shadow-blue-900/10 active:scale-95 transition-all">
-                  Initialize
+                  View
                 </Link>
               </div>
             </div>
@@ -93,13 +93,13 @@ export const ArticleList = ({ articles, onCreationAttempt }: { articles: Article
         <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800">
           <FileText className="text-blue-600 dark:text-blue-400 w-5 h-5" />
         </div>
-        <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Record Inventory</h2>
+        <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">My Articles</h2>
       </div>
       <button 
         onClick={(e) => onCreationAttempt?.(e, 'article')}
         className="px-5 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20"
       >
-        Write New
+        Create New
       </button>
     </div>
     <div className="p-2">
@@ -143,13 +143,13 @@ export const CourseList = ({ courses, onCreationAttempt }: { courses: LearningPa
         <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800">
           <BookOpen className="text-blue-600 dark:text-blue-400 w-5 h-5" />
         </div>
-        <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Learning Programs</h2>
+        <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">My Courses</h2>
       </div>
       <button 
         onClick={(e) => onCreationAttempt?.(e, 'course')}
         className="px-5 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20"
       >
-        Initialize
+        Create New
       </button>
     </div>
     <div className="p-2">
@@ -158,8 +158,8 @@ export const CourseList = ({ courses, onCreationAttempt }: { courses: LearningPa
           <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
             <BookOpen className="w-8 h-8 text-slate-200" />
           </div>
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">No active curricula</p>
-          <p className="text-[10px] text-slate-400 font-medium px-10 mb-6">Structured health intelligence paths for the community.</p>
+          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">No active courses</p>
+          <p className="text-[10px] text-slate-400 font-medium px-10 mb-6">Create courses to share your knowledge with the community.</p>
           <button 
             onClick={(e) => onCreationAttempt?.(e, 'course')}
             className="text-blue-600 dark:text-blue-400 font-black text-[10px] uppercase tracking-[0.2em] hover:underline"
@@ -170,16 +170,27 @@ export const CourseList = ({ courses, onCreationAttempt }: { courses: LearningPa
       ) : (
         courses.map(course => (
           <div key={course.id} className="p-6 sm:p-8 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all rounded-[32px] group">
-            <div className="space-y-2">
+            <div className="flex-1 space-y-2">
               <h3 className="text-lg font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:text-blue-400 dark:group-hover:text-blue-400 transition-colors tracking-tight capitalize">{course.title}</h3>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <span className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border ${course.status === 'published' ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 border-emerald-100' : 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 border-amber-100'}`}>{course.status}</span>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{course.category}</span>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800/50">
+                  <span className="text-[8px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{course.enrolledCount || 0} Students</span>
+                </div>
               </div>
             </div>
-            <Link href={`/learning/path/${course.id}`} className="p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-slate-400 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-400 transition-all shadow-sm active:scale-90">
-              <ExternalLink className="w-5 h-5" />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link 
+                href={`/expert/courses/${course.id}/progress`}
+                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+              >
+                View Progress
+              </Link>
+              <Link href={`/learning/${course.id}`} className="p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-slate-400 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-400 transition-all shadow-sm active:scale-90">
+                <ExternalLink className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         ))
       )}

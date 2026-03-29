@@ -34,17 +34,17 @@ export function ProtocolStatusNode({ tierName, timeLeft }: ProtocolStatusNodePro
 
       <div className="relative z-10">
         <h4 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-1">
-          STATUS
+          MY STATUS
         </h4>
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <div className={`w-1.5 h-1.5 rounded-full ${timeLeft ? 'bg-emerald-500 animate-pulse' : 'bg-slate-300 dark:bg-slate-700'}`} />
             <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${timeLeft ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'}`}>
-              {timeLeft ? 'Premium Active' : 'Standard Plan'}
+              {timeLeft ? 'Premium Active' : 'Basic Plan'}
             </span>
           </div>
           <div className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
-            <span className="text-[7px] font-black text-slate-400 uppercase tracking-widest">Integrity: {timeLeft ? 'MAX' : 'STABLE'}</span>
+            <span className="text-[7px] font-black text-slate-400 uppercase tracking-widest">Security: {timeLeft ? 'High' : 'Standard'}</span>
           </div>
         </div>
 
@@ -75,11 +75,11 @@ export function ProtocolStatusNode({ tierName, timeLeft }: ProtocolStatusNodePro
         ) : (
           <div className="space-y-4">
             <button className="w-full py-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest group-hover:bg-blue-600 group-hover:text-white transition-all">
-              Upgrade Plan
+              Upgrade My Plan
             </button>
             <div className="flex items-center gap-2 px-1">
               <ShieldCheck size={10} className="text-slate-300" />
-              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Base security active</span>
+              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Standard security active</span>
             </div>
           </div>
         )}

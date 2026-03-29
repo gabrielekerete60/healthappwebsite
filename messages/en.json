@@ -135,7 +135,7 @@
     "myEnrollments": "My Enrollments",
     "myCreations": "My Creations",
     "hostCourse": "Host Course",
-    "intelligenceDiscovery": "Intelligence Discovery",
+    "intelligenceDiscovery": "Health Progress",
     "noActiveInsights": "No active insights found",
     "reSyncFeed": "Resync Feed",
     "retryConnection": "Retry Connection",
@@ -210,11 +210,12 @@
       "userDisabled": "This user account has been disabled.",
       "userNotFound": "No account found with this email.",
       "wrongPassword": "The password you entered is incorrect.",
+      "invalidCredential": "The email or password you entered is incorrect. Please check your credentials and try again.",
       "weakPassword": "The password is too weak. Use at least 6 characters.",
       "networkRequestFailed": "Network error. Please check your connection.",
       "tooManyRequests": "Too many failed attempts. Please try again later.",
       "operationNotAllowed": "This sign-in method is currently disabled.",
-      "default": "An unexpected authentication error occurred."
+      "default": "AN UNEXPECTED AUTHENTICATION ERROR OCCURRED."
     }
   },
   "directory": {
@@ -253,21 +254,21 @@
     "progress": "Progress",
     "syncingIdentity": "Syncing Profile...",
     "header": {
-      "clinicalIdentity": "Personal Hub",
+      "clinicalIdentity": "My Profile",
       "settings": "Settings",
       "registryVerified": "Verified",
       "noPhone": "No phone"
     },
     "stats": {
-      "referralNode": "Referrals",
-      "dataVault": "Medical Vault",
+      "referralNode": "Invites",
+      "dataVault": "My Records",
       "evolution": "Level",
       "points": "Points",
       "rank": "Rank",
-      "initializeExtraction": "Download Data",
+      "initializeExtraction": "Download Records",
       "dataVaultDesc": "Download your health records and account data.",
-      "copyCode": "Referral code copied!",
-      "copyLink": "Referral link copied!",
+      "copyCode": "Invite code copied!",
+      "copyLink": "Invite link copied!",
       "initialize": "Start",
       "share": "Share",
       "active": "Active"
@@ -667,7 +668,7 @@
     "btnBack": "Back"
   },
   "referralsPage": {
-    "title": "Referrals",
+    "title": "Invites",
     "subtitle": "Grow the network. Earn points for every friend who joins.",
     "networkAuthority": "Account Level",
     "rank": "RANK",
@@ -676,8 +677,8 @@
     "ptsToEvolve": "{pts} PTS TO LEVEL UP",
     "currentMilestone": "Current Level",
     "nextEvolution": "Next Level",
-    "networkTracker": "Referral History",
-    "trackerSubtitle": "Real-time referral updates",
+    "networkTracker": "Invite History",
+    "trackerSubtitle": "Real-time invite updates",
     "selectionResult": "Result",
     "displayingFiltered": "Filtered Data",
     "rewardsInSelection": "Rewards",
@@ -699,11 +700,11 @@
       },
       {
         "name": "Guardian",
-        "desc": "Ensuring safe clinical connections."
+        "desc": "Ensuring safe connections."
       },
       {
         "name": "Architect",
-        "desc": "Top-level authority in the network."
+        "desc": "Top-level member in the network."
       }
     ]
   },
@@ -793,9 +794,9 @@
   "onboarding": {
     "initializing": "Starting Platform...",
     "steps": {
-      "referral": "Referral",
-      "identity": "Identity",
-      "security": "Security",
+      "referral": "Invite Code",
+      "identity": "My Info",
+      "security": "Safety",
       "location": "Location",
       "interests": "Interests",
       "role": "Role",
@@ -809,7 +810,7 @@
     "complete": "Complete Setup",
     "attentionRequired": "Attention Required",
     "referral": {
-      "title": "Have a referral code?",
+      "title": "Have an invite code?",
       "subtitle": "Enter a code to earn bonus points.",
       "placeholder": "INVITE-CODE-XXXX",
       "skip": "Skip for now",
@@ -819,7 +820,7 @@
     },
     "identity": {
       "title": "Tell us about yourself.",
-      "subtitle": "Your name will appear on your medical records.",
+      "subtitle": "Your name will appear on your records.",
       "firstName": "First Name",
       "lastName": "Last Name",
       "username": "Username",
@@ -840,7 +841,7 @@
       "securityProtocolDesc3": " across our network."
     },
     "security": {
-      "title": "Account Security.",
+      "title": "Account Safety.",
       "subtitle": "Verify your email and phone to keep your data safe.",
       "emailLabel": "Primary Email",
       "phoneLabel": "Phone Number",

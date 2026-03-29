@@ -12,10 +12,10 @@ export const PredictiveAnalytics: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                 <span className="px-3 py-1 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-indigo-500/20">AI Intelligence Node</span>
+                 <span className="px-3 py-1 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-indigo-500/20">Health Insights</span>
               </div>
-              <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Predictive Patient Analytics</h2>
-              <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mt-1">AI-driven projections based on your current clinical performance.</p>
+              <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">My Growth Insights</h2>
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mt-1">Estimated growth based on your profile performance.</p>
             </div>
             <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-2xl border border-slate-100 dark:border-slate-800">
                <div className="text-right px-4">
@@ -32,9 +32,9 @@ export const PredictiveAnalytics: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
-              { label: 'Projected Growth', value: '+24%', desc: 'Est. patient inflow increase', color: 'text-emerald-500' },
-              { label: 'Retention Score', value: '8.9/10', desc: 'AI-calculated patient loyalty', color: 'text-blue-500' },
-              { label: 'Market Demand', value: 'High', desc: 'Category: Chronic Care', color: 'text-purple-500' },
+              { label: 'Projected Growth', value: '+24%', desc: 'Est. new patients', color: 'text-emerald-500' },
+              { label: 'Retention Score', value: '8.9/10', desc: 'Calculated patient loyalty', color: 'text-blue-500' },
+              { label: 'Demand Level', value: 'High', desc: 'Category: Chronic Care', color: 'text-purple-500' },
             ].map((stat, i) => (
               <div key={i} className="space-y-2 p-6 rounded-3xl bg-slate-50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-800/50 hover:border-indigo-500/30 transition-all group">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em]">{stat.label}</p>
