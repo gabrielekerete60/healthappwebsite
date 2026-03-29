@@ -74,7 +74,8 @@ export default function NewCoursePage() {
           totalModules: modules.length,
           modules,
           status,
-          enrolledCount: 0
+          enrolledCount: 0,
+          createdAt: new Date().toISOString()
         });
         
         router.push(`/expert/courses/${courseId}`);

@@ -133,7 +133,7 @@ export default function ProfilePage() {
 
   const displayCourses = enrolledPaths.slice(0, 2).map((path, i) => ({
     title: path.title,
-    progress: path.progress,
+    progress: path.progress || 0,
     color: i % 2 === 0 ? 'bg-blue-600' : 'bg-indigo-600'
   }));
 

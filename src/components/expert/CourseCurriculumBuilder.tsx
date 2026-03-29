@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, Trash2, ChevronRight, Gp, FileText, PlayCircle, HelpCircle, GripVertical, Layout, Edit3, Clock, ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Plus, Trash2, ChevronRight, FileText, PlayCircle, HelpCircle, GripVertical, Layout, Edit3, Clock, ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Module, Lesson } from '@/types/learning';
 import { motion, AnimatePresence } from 'framer-motion';
 

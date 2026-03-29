@@ -2,36 +2,9 @@ import { db, auth } from '@/lib/firebase';
 import { collection, getDocs, doc, getDoc, setDoc, query, orderBy, limit, serverTimestamp, addDoc, updateDoc, increment, where } from 'firebase/firestore';
 import { FIRESTORE_COLLECTIONS } from '@/lib/constants';
 import { getUserSubcollection } from '@/lib/firestoreUtils';
+import { LearningPath, Module, Lesson } from '@/types/learning';
 
-export interface Lesson {
-  id: string;
-  title: string;
-  duration: string;
-  type: 'video' | 'article' | 'quiz';
-  content?: string;
-  videoUrl?: string;
-  isCompleted?: boolean;
-}
-
-export interface Module {
-  id: string;
-  title: string;
-  lessons: Lesson[];
-}
-
-export interface LearningPath {
-  id: string;
-  title: string;
-  description: string;
-  category: 'Medical' | 'Herbal' | 'Lifestyle';
-  icon: string;
-  progress: number;
-  totalModules: number;
-  modules: Module[];
-  enrolledCount?: number;
-  status?: string;
-  authorId?: string;
-}
+export type { LearningPath, Module, Lesson };
 
 export async function getLearningPaths(): Promise<LearningPath[]> {
   try {

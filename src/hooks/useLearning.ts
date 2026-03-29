@@ -24,7 +24,7 @@ export function useLearning() {
         setRecommendedPaths(recommended);
         
         // Filter enrolled paths (those with some progress)
-        const enrolled = paths.filter(p => p.progress > 0);
+        const enrolled = paths.filter(p => (p.progress || 0) > 0);
         setEnrolledPaths(enrolled);
       } catch (error) {
         console.error("Error loading learning paths:", error);

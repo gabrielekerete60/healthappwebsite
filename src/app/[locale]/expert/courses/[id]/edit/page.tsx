@@ -12,6 +12,7 @@ import { Module, LearningPath } from '@/types/learning';
 import { ExpertLayout } from '@/components/expert/ExpertLayout';
 import { CourseCurriculumBuilder } from '@/components/expert/CourseCurriculumBuilder';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from '@/i18n/routing';
 
 type StudioTab = 'overview' | 'curriculum' | 'preview';
 

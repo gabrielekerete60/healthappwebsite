@@ -73,7 +73,7 @@ export const LearningPathCard: React.FC<LearningPathCardProps> = ({ path, index,
           <span>{path.totalModules} Modules</span>
         </div>
         
-        {path.progress > 0 ? (
+        {(path.progress || 0) > 0 ? (
           <span className="font-bold text-blue-600 dark:text-blue-400">{path.progress}% Complete</span>
         ) : (
           <span className="text-slate-400 dark:text-slate-600 font-bold">Not Started</span>

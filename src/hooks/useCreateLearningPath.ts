@@ -98,7 +98,11 @@ export function useCreateLearningPath() {
         category,
         icon,
         totalModules: modules.length,
-        modules
+        modules,
+        authorId: 'admin',
+        authorName: 'HealthApp Admin',
+        status: 'published',
+        createdAt: new Date().toISOString()
       });
       showAlert('Course Created', 'The new curriculum has been synchronized with the learning nodes.', 'success');
       setTimeout(() => router.push('/admin/dashboard'), 2000);
