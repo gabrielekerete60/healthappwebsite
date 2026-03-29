@@ -62,13 +62,15 @@ export default function NewCoursePage() {
     try {
       const user = auth.currentUser;
       if (user) {
+        const finalAuthorName = expertName || user.displayName || 'Expert';
+        
         const courseId = await contentService.createLearningPath({
           title,
           description,
           category,
           icon,
           authorId: user.uid,
-          authorName: expertName,
+          authorName: finalAuthorName,
           totalModules: modules.length,
           modules,
           status,
