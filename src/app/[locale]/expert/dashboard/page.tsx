@@ -119,7 +119,7 @@ function DashboardContent() {
                       : 'text-slate-400 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-400'
                   }`}
                 >
-                  {tab === 'appointments' ? 'Consultations' : tab === 'queue' ? 'Live Triage' : tab === 'articles' ? 'Medical Records' : 'Curricula'}
+                  {tab === 'appointments' ? 'Appointments' : tab === 'queue' ? 'Patient Queue' : tab === 'articles' ? 'Articles' : 'Courses'}
                 </motion.button>
               ))}
             </div>

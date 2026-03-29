@@ -108,7 +108,7 @@ export const ArticleList = ({ articles, onCreationAttempt }: { articles: Article
           <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
             <FileText className="w-8 h-8 text-slate-200" />
           </div>
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">No published documentation</p>
+          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">No published articles</p>
           <button 
             onClick={(e) => onCreationAttempt?.(e, 'article')}
             className="text-blue-600 dark:text-blue-400 font-black text-[10px] uppercase tracking-[0.2em] hover:underline"
