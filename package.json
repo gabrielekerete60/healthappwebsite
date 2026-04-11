@@ -20,6 +20,7 @@
     "@google/generative-ai": "^0.24.1",
     "@types/crypto-js": "^4.2.2",
     "ai": "^6.0.67",
+    "canvas-confetti": "^1.9.4",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
     "firebase": "^12.8.0",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
